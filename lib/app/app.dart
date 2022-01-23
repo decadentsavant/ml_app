@@ -1,7 +1,7 @@
 import 'package:entries_repository/entries_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ml_app/home/home.dart';
+import 'package:ml_app/home/main_view.dart';
 import 'package:ml_app/l10n/l10n.dart';
 import 'package:ml_app/theme/theme.dart';
 
