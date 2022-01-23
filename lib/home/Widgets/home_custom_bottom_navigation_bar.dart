@@ -5,7 +5,6 @@ class CustomBottomNavBar extends StatefulWidget {
   const CustomBottomNavBar({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _CustomBottomNavBarState createState() => _CustomBottomNavBarState();
 }
 
@@ -32,11 +31,11 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           Center(
             heightFactor: 0.6,
             child: FloatingActionButton(
-                backgroundColor: primaryColor,
-                elevation: 0.1,
-                onPressed: () => 
-                Navigator.of(context).push(TodaysReviewPage.route()),
-                child: const Icon(Icons.shopping_basket),
+              backgroundColor: primaryColor,
+              elevation: 0.1,
+              onPressed: () =>
+                  Navigator.of(context).push(TodaysReviewPage.route()),
+              child: const Icon(Icons.shopping_basket),
             ),
           ),
           SizedBox(
@@ -48,9 +47,8 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                   text: 'Home',
                   icon: Icons.home_outlined,
                   selected: true,
-                  onPressed: () => 
-                  Navigator.of(context).push(NewEntryPage.route()),
-                  // ignore: avoid_redundant_argument_values
+                  onPressed: () =>
+                      Navigator.of(context).push(NewEntryPage.route()),
                   defaultColor: secondaryColor,
                   selectedColor: primaryColor,
                 ),
@@ -60,20 +58,19 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                   selected: false,
                   onPressed: () =>
                       Navigator.of(context).push(AllEntriesPage.route()),
-                  // ignore: avoid_redundant_argument_values
                   defaultColor: secondaryColor,
                   selectedColor: primaryColor,
                 ),
                 const SizedBox(width: 56),
                 NavBarIcon(
-                    text: 'Cart',
-                    icon: Icons.local_grocery_store_outlined,
-                    selected: false,
-                    onPressed: () =>
-                        Navigator.of(context).push(StatsPage.route()),
-                    // ignore: avoid_redundant_argument_values
-                    defaultColor: secondaryColor,
-                    selectedColor: primaryColor,),
+                  text: 'Cart',
+                  icon: Icons.local_grocery_store_outlined,
+                  selected: false,
+                  onPressed: () =>
+                      Navigator.of(context).push(StatsPage.route()),
+                  defaultColor: secondaryColor,
+                  selectedColor: primaryColor,
+                ),
                 NavBarIcon(
                   text: 'Calendar',
                   icon: Icons.date_range_outlined,
@@ -81,7 +78,6 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                   onPressed: () =>
                       Navigator.of(context).push(AccountPage.route()),
                   selectedColor: primaryColor,
-                  // ignore: avoid_redundant_argument_values
                   defaultColor: secondaryColor,
                 )
               ],
@@ -94,8 +90,10 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
 }
 
 class BottomNavCurvePainter extends CustomPainter {
-  BottomNavCurvePainter(
-      {this.backgroundColor = Colors.white, this.insetRadius = 38,});
+  BottomNavCurvePainter({
+    this.backgroundColor = Colors.white,
+    this.insetRadius = 38,
+  });
 
   Color backgroundColor;
   double insetRadius;
@@ -110,22 +108,36 @@ class BottomNavCurvePainter extends CustomPainter {
     final insetCurveEndX = size.width / 2 + insetRadius;
     final transitionToInsetCurveWidth = size.width * .05;
     path
-    ..quadraticBezierTo(size.width * 0.20, 0,
-        insetCurveBeginnningX - transitionToInsetCurveWidth, 0,)
-    ..quadraticBezierTo(
-        insetCurveBeginnningX, 0, insetCurveBeginnningX, insetRadius / 2,)
-    ..arcToPoint(Offset(insetCurveEndX, insetRadius / 2),
-        radius: const Radius.circular(10), clockwise: false,)
-
-    ..quadraticBezierTo(
-        insetCurveEndX, 0, insetCurveEndX + transitionToInsetCurveWidth, 0,)
-    ..quadraticBezierTo(size.width * 0.80, 0, size.width, 12)
-    ..lineTo(size.width, size.height + 56)
-    ..lineTo(
+      ..quadraticBezierTo(
+        size.width * 0.20,
         0,
-        size.height +
-            56,); 
-//+56 here extends the navbar below app bar to include 
+        insetCurveBeginnningX - transitionToInsetCurveWidth,
+        0,
+      )
+      ..quadraticBezierTo(
+        insetCurveBeginnningX,
+        0,
+        insetCurveBeginnningX,
+        insetRadius / 2,
+      )
+      ..arcToPoint(
+        Offset(insetCurveEndX, insetRadius / 2),
+        radius: const Radius.circular(10),
+        clockwise: false,
+      )
+      ..quadraticBezierTo(
+        insetCurveEndX,
+        0,
+        insetCurveEndX + transitionToInsetCurveWidth,
+        0,
+      )
+      ..quadraticBezierTo(size.width * 0.80, 0, size.width, 12)
+      ..lineTo(size.width, size.height + 56)
+      ..lineTo(
+        0,
+        size.height + 56,
+      );
+//+56 here extends the navbar below app bar to include
 //extra space on some screens (iphone 11)
     canvas.drawPath(path, paint);
   }
@@ -137,15 +149,15 @@ class BottomNavCurvePainter extends CustomPainter {
 }
 
 class NavBarIcon extends StatelessWidget {
-  const NavBarIcon(
-      {Key? key,
-      required this.text,
-      required this.icon,
-      required this.selected,
-      required this.onPressed,
-      this.selectedColor = const Color(0xffFF8527),
-      this.defaultColor = Colors.black54,})
-      : super(key: key);
+  const NavBarIcon({
+    Key? key,
+    required this.text,
+    required this.icon,
+    required this.selected,
+    required this.onPressed,
+    this.selectedColor = const Color(0xffFF8527),
+    this.defaultColor = Colors.black54,
+  }) : super(key: key);
   final String text;
   final IconData icon;
   final bool selected;

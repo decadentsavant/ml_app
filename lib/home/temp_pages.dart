@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-//NEW ENTRY PAGE
 class NewEntryPage extends StatelessWidget {
   const NewEntryPage({Key? key}) : super(key: key);
 
-  static Route<void> route(){
+  static Route<void> route() {
     return MaterialPageRoute(
-    builder: (BuildContext context) => const NewEntryView(),);
-}
+      builder: (BuildContext context) => const NewEntryView(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +20,12 @@ class NewEntryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('NewEntryView'),);
+    return const Center(
+      child: Text('NewEntryView'),
+    );
   }
 }
 
-
-// TODAY'S REVIEW PAGE
 class TodaysReviewPage extends StatelessWidget {
   const TodaysReviewPage({Key? key}) : super(key: key);
 
@@ -52,8 +52,6 @@ class TodaysReviewView extends StatelessWidget {
   }
 }
 
-
-//STATS PAGE
 class StatsPage extends StatelessWidget {
   const StatsPage({Key? key}) : super(key: key);
 
@@ -80,9 +78,6 @@ class StatsView extends StatelessWidget {
   }
 }
 
-
-
-//All ENTRIES PAGE
 class AllEntriesPage extends StatelessWidget {
   const AllEntriesPage({Key? key}) : super(key: key);
 
@@ -109,8 +104,6 @@ class AllEntriesView extends StatelessWidget {
   }
 }
 
-
-//ACCOUNT PAGE
 class AccountPage extends StatelessWidget {
   const AccountPage({Key? key}) : super(key: key);
 

@@ -34,7 +34,7 @@ class HomeView extends StatelessWidget {
           StatsPage(),
         ],
       ),
-    bottomNavigationBar: const CustomBottomNavBar(),
+      bottomNavigationBar: const CustomBottomNavBar(),
     );
   }
 }
