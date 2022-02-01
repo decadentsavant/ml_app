@@ -1,15 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:ml_app/account/account.dart.dart';
-import 'package:ml_app/all_entries/all_entries.dart';
-import 'package:ml_app/create_account/create_account.dart';
+// import 'package:ml_app/account/account.dart.dart';
+// import 'package:ml_app/all_entries/all_entries.dart';
+// import 'package:ml_app/create_account/create_account.dart';
+import 'package:ml_app/create_account/view/view.dart';
 import 'package:ml_app/login/login.dart';
-import 'package:ml_app/new_entry/new_entry.dart';
+// import 'package:ml_app/new_entry/new_entry.dart';
 import 'package:ml_app/router/app_state.dart';
 import 'package:ml_app/router/ui_pages.dart';
 import 'package:ml_app/splash/splash.dart';
-import 'package:ml_app/stats/stats.dart';
-import 'package:ml_app/todays_review/todays_review.dart';
+// import 'package:ml_app/stats/stats.dart';
+// import 'package:ml_app/todays_review/todays_review.dart';
 
 class MLRouterDelegate extends RouterDelegate<PageConfiguration>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<PageConfiguration> {
@@ -100,21 +101,21 @@ class MLRouterDelegate extends RouterDelegate<PageConfiguration>
         case Pages.createAccount:
           _addPageData(const CreateAccountPage(), createAccountPageConfig);
           break;
-        case Pages.newEntry:
-          _addPageData(const NewEntryPage(), newEntryPageConfig);
-          break;
-        case Pages.todaysReview:
-          _addPageData(const TodaysReviewPage(), newEntryPageConfig);
-          break;
-        case Pages.allEntries:
-          _addPageData(const AllEntriesPage(), allEntriesPageConfig);
-          break;
-        case Pages.stats:
-          _addPageData(const StatsPage(), statsPageConfig);
-          break;
-        case Pages.account:
-          _addPageData(const AccountPage(), accountPageConfig);
-          break;
+        // case Pages.newEntry:
+        //   _addPageData(const NewEntryPage(), newEntryPageConfig);
+        //   break;
+        // case Pages.todaysReview:
+        //   _addPageData(const TodaysReviewPage(), newEntryPageConfig);
+        //   break;
+        // case Pages.allEntries:
+        //   _addPageData(const AllEntriesPage(), allEntriesPageConfig);
+        //   break;
+        // case Pages.stats:
+        //   _addPageData(const StatsPage(), statsPageConfig);
+        //   break;
+        // case Pages.account:
+        //   _addPageData(const AccountPage(), accountPageConfig);
+          // break;
         case null:
           break;
       }
@@ -175,21 +176,21 @@ class MLRouterDelegate extends RouterDelegate<PageConfiguration>
       case Pages.createAccount:
         createAccountPageConfig.currentPageAction = action;
         break;
-      case Pages.newEntry:
-        newEntryPageConfig.currentPageAction = action;
-        break;
-      case Pages.allEntries:
-        allEntriesPageConfig.currentPageAction = action;
-        break;
-      case Pages.todaysReview:
-        todaysReviewPageConfig.currentPageAction = action;
-        break;
-      case Pages.stats:
-        statsPageConfig.currentPageAction = action;
-        break;
-      case Pages.account:
-        accountPageConfig.currentPageAction = action;
-        break;
+      // case Pages.newEntry:
+      //   newEntryPageConfig.currentPageAction = action;
+      //   break;
+      // case Pages.allEntries:
+      //   allEntriesPageConfig.currentPageAction = action;
+      //   break;
+      // case Pages.todaysReview:
+      //   todaysReviewPageConfig.currentPageAction = action;
+      //   break;
+      // case Pages.stats:
+      //   statsPageConfig.currentPageAction = action;
+      //   break;
+      // case Pages.account:
+      //   accountPageConfig.currentPageAction = action;
+      //   break;
       case null:
         break;
     }

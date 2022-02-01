@@ -38,7 +38,6 @@ class AppState extends ChangeNotifier {
   bool get loggedIn => _loggedIn;
   bool _splashFinished = false;
   bool get splashFinished => _splashFinished;
-  // final List entries = _todosRepository.getTodos();
   String emailAddress = '';
   String password = '';
 
@@ -55,21 +54,11 @@ class AppState extends ChangeNotifier {
     _currentAction = PageAction();
   }
 
-  // void addEntry(Entry entry) {
-  //   entries.add(entry);
-  //   notifyListeners();
-  // }
-
-  // void removeEntry(Entry entry) {
-  //   entries.add(entry);
-  //   notifyListeners();
-  // }
-
   void setSplashFinished() {
     _splashFinished = true;
     if (_loggedIn) {
       _currentAction =
-          PageAction(state: PageState.replaceAll, page: todaysReviewPageConfig);
+          PageAction(state: PageState.replaceAll, page: loginPageConfig);
     } else {
       _currentAction =
           PageAction(state: PageState.replaceAll, page: loginPageConfig);
@@ -81,7 +70,7 @@ class AppState extends ChangeNotifier {
     _loggedIn = true;
     saveLoginState(loggedIn: loggedIn);
     _currentAction =
-        PageAction(state: PageState.replaceAll, page: todaysReviewPageConfig);
+        PageAction(state: PageState.replaceAll, page: createAccountPageConfig);
     notifyListeners();
   }
 
@@ -89,7 +78,7 @@ class AppState extends ChangeNotifier {
     _loggedIn = false;
     saveLoginState(loggedIn: loggedIn);
     _currentAction =
-        PageAction(state: PageState.replaceAll, page: loginPageConfig);
+        PageAction(state: PageState.replaceAll, page: createAccountPageConfig);
   }
 
   Future<bool> saveLoginState({required bool loggedIn}) async {
@@ -98,18 +87,13 @@ class AppState extends ChangeNotifier {
     throw Exception('Corey - saveLoginState failed');
   }
 
-  Future<bool> getLoggedInState() async {
+  Future<dynamic> getLoggedInState() async {
     final prefs = await SharedPreferences.getInstance();
     final dynamic result = prefs.getBool(loggedInKey);
     if (result is bool) {
       _loggedIn = result;
-    } else if 
-    //might be unnecessary contingency. I don't understand exception yet 
-    (result is Exception) {
-      throw Exception(
-        'Corey - getLoggedInState failed because SharedPrefs getBool',
-      );
+    } else if (result == null) {
+      _loggedIn = false;
     }
-    throw Exception('Corey - getLoggedInState failed');
   }
 }
