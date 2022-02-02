@@ -34,9 +34,10 @@ class SplashPageState extends State<SplashPage> {
     super.didChangeDependencies();
     if (!_initialized) {
       _initialized = true;
-      Timer(const Duration(milliseconds: 500), () {
+      Timer(const Duration(seconds: 2), () {
         appState.setSplashFinished();
       });
     }
   }
 }
+
