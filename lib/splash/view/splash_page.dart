@@ -5,7 +5,6 @@ import 'package:ml_app/router/app_state.dart';
 import 'package:provider/provider.dart';
 
 const String loggedInKey = 'LoggedIn';
-
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -34,10 +33,9 @@ class SplashPageState extends State<SplashPage> {
     super.didChangeDependencies();
     if (!_initialized) {
       _initialized = true;
-      Timer(const Duration(seconds: 2), () {
+      Timer(const Duration(milliseconds: 500), () {
         appState.setSplashFinished();
       });
     }
   }
 }
-
