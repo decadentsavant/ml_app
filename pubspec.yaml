@@ -9,9 +9,9 @@ environment:
 dependencies:
   bloc: ^8.0.2
   entries_api:
-    path: packages/entries_api
+    path: packages/entries_packages/entries_api
   entries_repository:
-    path: packages/entries_repository
+    path: packages/entries_packages/entries_repository
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
@@ -20,7 +20,7 @@ dependencies:
   flutter_services_binding: ^0.1.0
   intl: ^0.17.0
   local_storage_entries_api:
-    path: packages/local_storage_entries_api
+    path: packages/entries_packages/local_storage_entries_api
   provider: ^6.0.2
   uni_links: ^0.5.1
 

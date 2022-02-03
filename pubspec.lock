@@ -116,14 +116,14 @@ packages:
   entries_api:
     dependency: "direct main"
     description:
-      path: "packages/entries_api"
+      path: "packages/entries_packages/entries_api"
       relative: true
     source: path
     version: "1.0.0+1"
   entries_repository:
     dependency: "direct main"
     description:
-      path: "packages/entries_repository"
+      path: "packages/entries_packages/entries_repository"
       relative: true
     source: path
     version: "1.0.0+1"
@@ -248,7 +248,7 @@ packages:
   local_storage_entries_api:
     dependency: "direct main"
     description:
-      path: "packages/local_storage_entries_api"
+      path: "packages/entries_packages/local_storage_entries_api"
       relative: true
     source: path
     version: "1.0.0+1"
