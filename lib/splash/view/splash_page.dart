@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:ml_app/router/app_state.dart';
+import 'package:ml_app/theme/shared_ui_widgets/shared_ui_widgets.dart';
 import 'package:provider/provider.dart';
 
 const String loggedInKey = 'LoggedIn';
+
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -19,10 +21,15 @@ class SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     appState = Provider.of<AppState>(context);
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: Text('WTF SPLASH PAAAAAGE'),
+        child: Stack(
+          children: const <Widget>[
+            Background(),
+            Center(
+              child: Text('Splash Page'),
+            ),
+          ],
         ),
       ),
     );
