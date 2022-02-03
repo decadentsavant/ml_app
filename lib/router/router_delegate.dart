@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 // import 'package:ml_app/create_account/create_account.dart';
 import 'package:ml_app/create_account/view/view.dart';
 import 'package:ml_app/login/login.dart';
-// import 'package:ml_app/new_entry/new_entry.dart';
+import 'package:ml_app/new_entry/new_entry.dart';
 import 'package:ml_app/router/app_state.dart';
 import 'package:ml_app/router/ui_pages.dart';
 import 'package:ml_app/splash/splash.dart';
@@ -18,31 +18,67 @@ class MLRouterDelegate extends RouterDelegate<PageConfiguration>
     appState.addListener(notifyListeners);
   }
 
+  /// List of pages is core of app's navigation and denotes the current list of
+  /// pages in the navigation stack.
   final List<Page> _pages = [];
 
   final AppState appState;
 
+  /// [PopNavigatorRouterDelegateMixin] requires a [navigatorKey] used for
+  /// retrieving the current navigator of the [Router]. Important that its
+  /// only created once.
   @override
   final GlobalKey<NavigatorState> navigatorKey;
 
+  /// Getter for a list that cannot be changed.
+  List<MaterialPage> get pages => List.unmodifiable(_pages);
+
+  /// Number of pages function.
+  int numPages() => _pages.length;
+
+  /// Is called by [Router] when it detects route information may have changed.
+  /// 'current' means the top most page of app i.e. [_pages].last. Returns the
+  /// configuration of type [PageConfiguration] as defined when creating
+  /// routerDelegate<PageConfiguration> in [MLRouterDelegate] constructor. The
+  /// [currentConfiguration] for this last page can be accessed as 
+  /// _pages.last.arguments.
+  @override
+  PageConfiguration get currentConfiguration =>
+      _pages.last.arguments! as PageConfiguration;
+
+  /// Called by [RouterDelegate] to obtain the widget tree that represents
+  /// the current state. In this app, the current state is the navigation
+  /// history of the app.
   @override
   Widget build(BuildContext context) {
     return Navigator(
       key: navigatorKey,
+      // Tells Navigator what to do when app requests removal of page via back
+      // button.
       onPopPage: _onPopPage,
+      // Call to return the current list of pages representing this app's
+      // navigation stack. 
       pages: buildPages(),
     );
   }
 
+  // Called when pop is invoked, but current Route corresponds to a Page
+  // found in the pages list.
   bool _onPopPage(Route<dynamic> route, dynamic result) {
     final didPop = route.didPop(result);
+  // TODO(Corey): see .didPop documentation. Is opposite of this return value.
+  // I entered the test below. Check later when built out. Remove this after.
+    print('_onPop returned $didPop');
     if (!didPop) {
+    print('About to return first false...');
       return false;
     }
     if (canPop()) {
       pop();
+    print('About to return true...');
       return true;
     } else {
+    print('About to return second false...');
       return false;
     }
   }
@@ -71,7 +107,11 @@ class MLRouterDelegate extends RouterDelegate<PageConfiguration>
     }
     return Future.value(false);
   }
-
+  // 'key' -> ex. String 'Splash'
+  // 'name' is path -> String '/splash' 
+  // 'arguments' passes through the PageConfiguration to easily access it, 
+  //  if needed.
+  // 'child' is the UI widget.
   MaterialPage _createPage(Widget? child, PageConfiguration? pageConfig) {
     return MaterialPage<dynamic>(
       key: ValueKey(pageConfig?.key),
@@ -81,18 +121,20 @@ class MLRouterDelegate extends RouterDelegate<PageConfiguration>
     );
   }
 
+  // Adds page to navigation stack.
   void _addPageData(Widget? child, PageConfiguration? pageConfig) {
     _pages.add(_createPage(child, pageConfig));
   }
 
+  // Public method to add page. Also, see pushWidget().
   void addPage(PageConfiguration? pageConfig) {
     final shouldAddPage = _pages.isEmpty ||
+        // Make sure we don't duplicate pages
         (_pages.last.arguments! as PageConfiguration).uiPage !=
             pageConfig?.uiPage;
     if (shouldAddPage) {
       switch (pageConfig?.uiPage) {
         case Pages.splash:
-          //wont be const later
           _addPageData(const SplashPage(), splashPageConfig);
           break;
         case Pages.login:
@@ -101,9 +143,9 @@ class MLRouterDelegate extends RouterDelegate<PageConfiguration>
         case Pages.createAccount:
           _addPageData(const CreateAccountPage(), createAccountPageConfig);
           break;
-        // case Pages.newEntry:
-        //   _addPageData(const NewEntryPage(), newEntryPageConfig);
-        //   break;
+        case Pages.newEntry:
+          _addPageData(const NewEntryPage(), newEntryPageConfig);
+          break;
         // case Pages.todaysReview:
         //   _addPageData(const TodaysReviewPage(), newEntryPageConfig);
         //   break;
@@ -115,7 +157,7 @@ class MLRouterDelegate extends RouterDelegate<PageConfiguration>
         //   break;
         // case Pages.account:
         //   _addPageData(const AccountPage(), accountPageConfig);
-          // break;
+        // break;
         case null:
           break;
       }
@@ -140,19 +182,24 @@ class MLRouterDelegate extends RouterDelegate<PageConfiguration>
     setNewRoutePath(newRoute);
   }
 
+  // same as add page, but with different name to be in line with Flutter's push/pop
   void push(PageConfiguration newRoute) {
     addPage(newRoute);
   }
 
+  // Allows adding a new widget using the argumnet of type Widget.
+  // Use for pages you dont use addPage for.
   void pushWidget(Widget? child, PageConfiguration? newRoute) {
     _addPageData(child, newRoute);
   }
 
+  // Adds a list of pages
   void addAll(List<PageConfiguration>? routes) {
     _pages.clear();
     routes!.forEach(addPage);
   }
 
+  // Clears the list and adds a new page, replacing all pages there before.
   @override
   Future<void> setNewRoutePath(PageConfiguration? configuration) {
     final shouldAddPage = _pages.isEmpty ||
@@ -162,9 +209,11 @@ class MLRouterDelegate extends RouterDelegate<PageConfiguration>
       _pages.clear();
       addPage(configuration);
     }
+  // Not sure why this is necessary.
     return SynchronousFuture(null);
   }
 
+  // Records action associated with the page.
   void _setPageAction(PageAction action) {
     switch (action.page?.uiPage) {
       case Pages.splash:
@@ -176,9 +225,9 @@ class MLRouterDelegate extends RouterDelegate<PageConfiguration>
       case Pages.createAccount:
         createAccountPageConfig.currentPageAction = action;
         break;
-      // case Pages.newEntry:
-      //   newEntryPageConfig.currentPageAction = action;
-      //   break;
+      case Pages.newEntry:
+        newEntryPageConfig.currentPageAction = action;
+        break;
       // case Pages.allEntries:
       //   allEntriesPageConfig.currentPageAction = action;
       //   break;
@@ -197,6 +246,7 @@ class MLRouterDelegate extends RouterDelegate<PageConfiguration>
     return;
   }
 
+  // Returns a list of pages based on current app state
   List<Page> buildPages() {
     if (!appState.splashFinished) {
       replaceAll(splashPageConfig);
@@ -230,16 +280,17 @@ class MLRouterDelegate extends RouterDelegate<PageConfiguration>
           addAll(appState.currentAction.pages);
       }
     }
+    // Resets page state to 'none' (default in PageAction).
     appState.resetCurrentAction();
     return List.of(_pages);
   }
 
+  // see https://www.raywenderlich.com/19457817-flutter-navigator-2-0-and-deep-links
+  // to handle deep linking in this method
   void parseRoute(Uri uri) {
     if (uri.pathSegments.isEmpty) {
       setNewRoutePath(splashPageConfig);
       return;
     }
-    // see https://www.raywenderlich.com/19457817-flutter-navigator-2-0-and-deep-links
-    // to handle deep linking here
   }
 }

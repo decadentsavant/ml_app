@@ -5,6 +5,7 @@ import 'package:ml_app/router/ui_pages.dart';
 
 const String loggedInKey = 'LoggedIn';
 
+/// Enum defines state of page, ex. if "addPage", a page needs to be added.
 enum PageState {
   none,
   addPage,
@@ -15,6 +16,10 @@ enum PageState {
   replaceAll,
 }
 
+/// Wraps items that allow router to handle an action.
+/// [page], [pages], [widget] are optional and used differently 
+/// depending on page state. [widget] holds current page action
+/// and other state  
 class PageAction {
   PageAction({
     this.state = PageState.none,
@@ -28,6 +33,7 @@ class PageAction {
   List<PageConfiguration>? pages;
   Widget? widget;
 }
+
 
 class AppState extends ChangeNotifier {
   AppState() {
@@ -58,7 +64,7 @@ class AppState extends ChangeNotifier {
     _splashFinished = true;
     if (_loggedIn) {
       _currentAction =
-          PageAction(state: PageState.replaceAll, page: loginPageConfig);
+          PageAction(state: PageState.replaceAll, page: newEntryPageConfig);
     } else {
       _currentAction =
           PageAction(state: PageState.replaceAll, page: loginPageConfig);
@@ -81,10 +87,9 @@ class AppState extends ChangeNotifier {
         PageAction(state: PageState.replaceAll, page: createAccountPageConfig);
   }
 
-  Future<bool> saveLoginState({required bool loggedIn}) async {
+  Future<bool?> saveLoginState({required bool loggedIn}) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(loggedInKey, loggedIn);
-    throw Exception('Corey - saveLoginState failed');
   }
 
   Future<dynamic> getLoggedInState() async {
