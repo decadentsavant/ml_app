@@ -17,9 +17,9 @@ enum PageState {
 }
 
 /// Wraps items that allow router to handle an action.
-/// [page], [pages], [widget] are optional and used differently 
+/// [page], [pages], [widget] are optional and used differently
 /// depending on page state. [widget] holds current page action
-/// and other state  
+/// and other state
 class PageAction {
   PageAction({
     this.state = PageState.none,
@@ -33,7 +33,6 @@ class PageAction {
   List<PageConfiguration>? pages;
   Widget? widget;
 }
-
 
 class AppState extends ChangeNotifier {
   AppState() {
@@ -93,6 +92,9 @@ class AppState extends ChangeNotifier {
   }
 
   Future<dynamic> getLoggedInState() async {
+    // logout() for testing only...
+    // Delete after implementing logout button(SharedPref is keeping it offline)
+    logout();
     final prefs = await SharedPreferences.getInstance();
     final dynamic result = prefs.getBool(loggedInKey);
     if (result is bool) {

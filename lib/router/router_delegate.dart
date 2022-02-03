@@ -66,19 +66,13 @@ class MLRouterDelegate extends RouterDelegate<PageConfiguration>
   // found in the pages list.
   bool _onPopPage(Route<dynamic> route, dynamic result) {
     final didPop = route.didPop(result);
-  // TODO(Corey): see .didPop documentation. Is opposite of this return value.
-  // I entered the test below. Check later when built out. Remove this after.
-    print('_onPop returned $didPop');
     if (!didPop) {
-    print('About to return first false...');
       return false;
     }
     if (canPop()) {
       pop();
-    print('About to return true...');
       return true;
     } else {
-    print('About to return second false...');
       return false;
     }
   }
