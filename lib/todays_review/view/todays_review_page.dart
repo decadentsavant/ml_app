@@ -25,7 +25,7 @@ class TodaysReviewPage extends StatelessWidget {
         children: const [
           Background(),
           Center(
-            child: Text('New Entry Page'),
+            child: Text('Todays Review Page'),
           )
         ],
       ),

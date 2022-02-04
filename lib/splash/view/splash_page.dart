@@ -37,7 +37,7 @@ class SplashPageState extends State<SplashPage> {
     if (!_initialized) {
       _initialized = true;
       Timer(const Duration(milliseconds: 500), () {
-        // nav somewhere
+
       });
     }
   }

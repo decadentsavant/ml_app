@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ml_app/stats/stats.dart';
+import 'package:ml_app/theme/shared_ui_widgets/background.dart';
 
 class StatsPage extends StatelessWidget {
   const StatsPage({Key? key}) : super(key: key);
@@ -37,25 +38,6 @@ class StatsPage extends StatelessWidget {
           ],
         )
       ],
-    );
-  }
-}
-
-class Background extends StatelessWidget {
-  const Background({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Colors.blue.shade50,
-            Colors.blue.shade500,
-          ],
-        ),
-      ),
     );
   }
 }

@@ -27,11 +27,10 @@ class HomeView extends StatelessWidget {
     final selectedTab = context.select((HomeCubit cubit) => cubit.state.tab);
 
     return Scaffold(
-      extendBody: true,
       body: IndexedStack(
         index: selectedTab.index,
         children: const [
-          NewEntryPage(),
+          TodaysReviewPage(),
           AllEntriesPage(),
           StatsPage(),
           AccountPage(),
@@ -39,19 +38,19 @@ class HomeView extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        key: const Key('hoveView_todaysreview_floatingActionButtion'),
-        onPressed: () => Navigator.of(context).push(TodaysReviewPage.route()),
-        child: const Icon(Icons.access_time),
+        key: const Key('homeView_addEntry_floatingActionButtion'),
+        onPressed: () => Navigator.of(context).push(NewEntryPage.route()),
+        child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _HomeTabButton(
               groupValue: selectedTab,
-              value: HomeTab.newEntry,
-              icon: const Icon(Icons.add_box_outlined),
+              value: HomeTab.today,
+              icon: const Icon(Icons.access_time_outlined),
             ),
             _HomeTabButton(
               groupValue: selectedTab,
