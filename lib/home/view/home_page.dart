@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ml_app/account/account.dart.dart';
 import 'package:ml_app/all_entries/all_entries.dart';
+import 'package:ml_app/edit_entry/edit_entry.dart';
 import 'package:ml_app/home/main_view.dart';
-import 'package:ml_app/new_entry/new_entry.dart';
 import 'package:ml_app/stats/stats.dart';
 import 'package:ml_app/todays_review/todays_review.dart';
 
@@ -39,7 +39,7 @@ class HomeView extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         key: const Key('homeView_addEntry_floatingActionButtion'),
-        onPressed: () => Navigator.of(context).push(NewEntryPage.route()),
+        onPressed: () => Navigator.of(context).push(EditEntryPage.route()),
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomAppBar(
