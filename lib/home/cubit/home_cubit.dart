@@ -7,11 +7,11 @@ class HomeCubit extends Cubit<HomeState> {
   void setTab(HomeTab tab) => emit(HomeState(tab: tab));
 }
 
-enum HomeTab { newEntry, all, stats, account }
+enum HomeTab { today, all, stats, account }
 
 class HomeState extends Equatable {
   const HomeState({
-    this.tab = HomeTab.newEntry,
+    this.tab = HomeTab.today,
   });
 
   final HomeTab tab;

@@ -5,6 +5,8 @@ import 'package:ml_app/bootstrap.dart';
 Future<void> main() async {
   FlutterServicesBinding.ensureInitialized();
 
+  //entriesApi is abstract. LocalStorageEntriesApi is an implementation
+  //of an entriesApi instance
   final entriesApi = LocalStorageEntriesApi(
     plugin: await SharedPreferences.getInstance(),
   );

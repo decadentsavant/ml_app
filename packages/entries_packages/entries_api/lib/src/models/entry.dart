@@ -53,16 +53,17 @@ class Entry extends Equatable {
     this.frequencyInDays = const [1, 2, 4, 7, 14, 21, 30, 60, 90, 180, 365],
     this.entryPriority = EntryPriority.normal,
     DateTime? activationDate,
-    this.isActive = false,
+    this.isActive = true,
   })  : assert(
           id == null || id.isNotEmpty,
           'id can not be null and should not be empty',
         ),
         id = id ?? const Uuid().v4(),
-        assert(
-          activationDate == null,
-          'activationDate can not be null and should not be empty',
-        ),
+        // TODO(Corey): This code fails but above is fine.
+        // assert(
+        //   activationDate == null,
+        //   'activationDate can not be null and should not be empty',
+        // ),
         activationDate = activationDate ?? DateTime.now();
 
   /// The entry's id.
