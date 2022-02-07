@@ -1,5 +1,5 @@
 name: local_storage_entries_api
-description: A Flutter implementation of the TodosApi that uses local storage.
+description: A Flutter implementation of the EntriesApi that uses local storage.
 version: 1.0.0+1
 publish_to: none
 

@@ -12,6 +12,7 @@ dependencies:
     path: packages/entries_api
   entries_repository:
     path: packages/entries_repository
+  equatable: ^2.0.3
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.0
