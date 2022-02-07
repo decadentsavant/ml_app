@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ml_app/account/account.dart.dart';
 import 'package:ml_app/all_entries/all_entries.dart';
-import 'package:ml_app/edit_entry/edit_entry.dart';
-import 'package:ml_app/home/main_view.dart';
+import 'package:ml_app/home/home.dart';
 import 'package:ml_app/stats/stats.dart';
-import 'package:ml_app/todays_review/todays_review.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -29,43 +27,28 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       body: IndexedStack(
         index: selectedTab.index,
-        children: const [
-          TodaysReviewPage(),
-          AllEntriesPage(),
-          StatsPage(),
-          AccountPage(),
-        ],
+        children: const [AllEntriesPage(), StatsPage()],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        key: const Key('homeView_addEntry_floatingActionButtion'),
-        onPressed: () => Navigator.of(context).push(EditEntryPage.route()),
+        key: const Key('homeView_addEntry_floatingActionButton'),
+        onPressed: () {},
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _HomeTabButton(
               groupValue: selectedTab,
-              value: HomeTab.today,
-              icon: const Icon(Icons.access_time_outlined),
-            ),
-            _HomeTabButton(
-              groupValue: selectedTab,
-              value: HomeTab.all,
-              icon: const Icon(Icons.list_alt_outlined),
+              value: HomeTab.entries,
+              icon: const Icon(Icons.list_rounded),
             ),
             _HomeTabButton(
               groupValue: selectedTab,
               value: HomeTab.stats,
-              icon: const Icon(Icons.bar_chart_outlined),
-            ),
-            _HomeTabButton(
-              groupValue: selectedTab,
-              value: HomeTab.account,
-              icon: const Icon(Icons.account_circle_outlined),
+              icon: const Icon(Icons.show_chart_rounded),
             ),
           ],
         ),
