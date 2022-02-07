@@ -36,7 +36,7 @@ enum FrequencyType {
 /// A single entry item.
 ///
 /// Contains an [id], [title], [source], [notes], [relatedUrl], [frequencyType],
-/// [frequencyInDays], [entryPriority], [activationDate], and an [isActive] 
+/// [frequencyInDays], [entryPriority], [activationDate], and an [isActive]
 /// flag.
 /// {@endtemplate}
 @immutable
@@ -149,5 +149,15 @@ class Entry extends Equatable {
   JsonMap toJson() => _$EntryToJson(this);
 
   @override
-  List<Object> get props => [id];
+  List<Object> get props => [
+        id,
+        title,
+        // source, Can't call on String?
+        notes,
+        frequencyType,
+        frequencyInDays,
+        entryPriority,
+        activationDate,
+        isActive,
+      ];
 }

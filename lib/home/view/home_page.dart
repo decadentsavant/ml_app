@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ml_app/all_entries/all_entries.dart';
+import 'package:ml_app/edit_entry/edit_entry.dart';
 import 'package:ml_app/home/home.dart';
 import 'package:ml_app/stats/stats.dart';
 
@@ -32,13 +33,13 @@ class HomeView extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         key: const Key('homeView_addEntry_floatingActionButton'),
-        onPressed: () {},
+        onPressed: () => Navigator.of(context).push(EditEntryPage.route()),
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             _HomeTabButton(
               groupValue: selectedTab,

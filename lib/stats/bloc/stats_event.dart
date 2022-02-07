@@ -6,3 +6,7 @@ abstract class StatsEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class StatsSubscriptionRequested extends StatsEvent{
+  const StatsSubscriptionRequested();
+}

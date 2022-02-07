@@ -1,12 +1,129 @@
+import 'package:entries_repository/entries_repository.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ml_app/all_entries/all_entries.dart';
+import 'package:ml_app/edit_entry/edit_entry.dart';
 
 class AllEntriesPage extends StatelessWidget {
   const AllEntriesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('All Entries Page'),
+    return BlocProvider(
+      create: (context) => AllEntriesBloc(
+        entriesRepository: context.read<EntriesRepository>(),
+      )..add(const AllEntriesSubscriptionRequested()),
+      child: const AllEntriesView(),
+    );
+  }
+}
+
+class AllEntriesView extends StatelessWidget {
+  const AllEntriesView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('All Entries'),
+        actions: const [
+          AllEntriesFilterButton(),
+          // AllEntriesOptionsButton(),
+        ],
+      ),
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<AllEntriesBloc, AllEntriesState>(
+            listenWhen: (previous, current) =>
+                previous.status != current.status,
+            listener: (context, state) {
+              if (state.status == AllEntriesStatus.failure) {
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(
+                    const SnackBar(
+                      content: Text('Error on BlocListener'),
+                    ),
+                  );
+              }
+            },
+          ),
+          BlocListener<AllEntriesBloc, AllEntriesState>(
+            listenWhen: (previous, current) =>
+                previous.lastDeletedEntry != current.lastDeletedEntry &&
+                current.lastDeletedEntry != null,
+            listener: (context, state) {
+              final deletedEntry = state.lastDeletedEntry!;
+              final messenger = ScaffoldMessenger.of(context);
+              messenger
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: Text('${deletedEntry.title} entry deleted',),
+                    action: SnackBarAction(
+                      label: 'Undo Deletion',
+                      onPressed: () {
+                        messenger.hideCurrentSnackBar();
+                        context
+                            .read<AllEntriesBloc>()
+                            .add(const AllEntriesUndoDeletionRequested());
+                      },
+                    ),
+                  ),
+                );
+            },
+          ),
+        ],
+        child: BlocBuilder<AllEntriesBloc, AllEntriesState>(
+          builder: (context, state) {
+            if (state.entries.isEmpty) {
+              if (state.status == AllEntriesStatus.loading) {
+                return const Center(child: CupertinoActivityIndicator());
+              } else if (state.status != AllEntriesStatus.success) {
+                return const SizedBox();
+              } else {
+                return Center(
+                  child: Text(
+                    'You have no entries. Make some!',
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                );
+              }
+            }
+
+            return CupertinoScrollbar(
+              child: ListView(
+                children: [
+                  for (final entry in state.filteredEntries)
+                    AllEntriesListTile(
+                      entry: entry,
+                      onToggleIsActive: (isIsActive) {
+                        context.read<AllEntriesBloc>().add(
+                              AllEntriesIsActiveToggled(
+                                entry: entry,
+                                isActive: isIsActive,
+                              ),
+                            );
+                      },
+                      onDismissed: (_) {
+                        context
+                            .read<AllEntriesBloc>()
+                            .add(AllEntriesEntryDeleted(entry));
+                      },
+                      onTap: () {
+                        Navigator.of(context).push(
+                         EditEntryPage.route(initialEntry: entry),
+                         );
+                      },
+                    ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

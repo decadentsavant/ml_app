@@ -2,16 +2,16 @@
 
 import 'package:entries_repository/entries_repository.dart';
 
-enum EntriesViewFilter { all, activeOnly, archiveOnly }
+enum AllEntriesViewFilter { all, activeOnly, archiveOnly }
 
-extension EntriesViewFilterX on EntriesViewFilter {
+extension AllEntriesViewFilterX on AllEntriesViewFilter {
   bool apply(Entry entry) {
     switch (this) {
-      case EntriesViewFilter.all:
+      case AllEntriesViewFilter.all:
         return true;
-      case EntriesViewFilter.activeOnly:
+      case AllEntriesViewFilter.activeOnly:
         return entry.isActive;
-      case EntriesViewFilter.archiveOnly:
+      case AllEntriesViewFilter.archiveOnly:
         return !entry.isActive;
     }
   }
