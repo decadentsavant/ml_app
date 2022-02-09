@@ -8,7 +8,7 @@ class AllEntriesListTile extends StatelessWidget {
     this.onToggleIsActive,
     this.onDismissed,
     this.onTap,
-    }) : super(key: key);
+  }) : super(key: key);
 
   final Entry entry;
   final ValueChanged<bool>? onToggleIsActive;
@@ -18,7 +18,24 @@ class AllEntriesListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final captionColor = theme.textTheme.caption?.color;
+    // TODO(Corey): Color the source maybe using technique below
+    // var text = RichText(
+    //   text: TextSpan(
+    //     style: TextStyle(
+    //       fontSize: theme.textTheme.bodyText1?.fontSize,
+    //       color: theme.textTheme.bodyText1?.color,
+    //     ),
+    //     children: <TextSpan>[
+    //       TextSpan(text: entryTitle),
+    //       TextSpan(
+    //         text: entrySource,
+    //         style: TextStyle(
+    //           color: theme.textTheme.caption?.color,
+    //         ),
+    //       )
+    //     ],
+    //   ),
+    // );
 
     return Dismissible(
       key: Key('allEntriesListTile_dismissible_${entry.id}'),
@@ -35,23 +52,24 @@ class AllEntriesListTile extends StatelessWidget {
       ),
       child: ListTile(
         onTap: onTap,
-        title: Text(
-          entry.title,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: entry.isActive
-            ? null
-            : TextStyle(
-              color: captionColor,
-              decoration: TextDecoration.lineThrough,
-            ),
-        ),
+        tileColor: entry.isActive ? null : Colors.red[300],
+        title: entry.source == null
+            ? Text(
+                entry.title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              )
+            : Text(
+                '${entry.title} - ${entry.source}',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
         subtitle: Text(
-          entry.isActive.toString(),
+          entry.activationDate.toString(),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
-        ),
-    )    ;
+      ),
+    );
   }
 }

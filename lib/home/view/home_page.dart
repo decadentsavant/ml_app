@@ -4,6 +4,7 @@ import 'package:ml_app/all_entries/all_entries.dart';
 import 'package:ml_app/edit_entry/edit_entry.dart';
 import 'package:ml_app/home/home.dart';
 import 'package:ml_app/stats/stats.dart';
+import 'package:ml_app/todays_review/view/todays_review_dart.dart';
 
 
 class HomePage extends StatelessWidget {
@@ -28,7 +29,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       body: IndexedStack(
         index: selectedTab.index,
-        children: const [AllEntriesPage(), StatsPage()],
+        children: const [TodaysReviewPage(), AllEntriesPage(), StatsPage()],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
@@ -43,7 +44,12 @@ class HomeView extends StatelessWidget {
           children: [
             _HomeTabButton(
               groupValue: selectedTab,
-              value: HomeTab.entries,
+              value: HomeTab.todaysReview,
+              icon: const Icon(Icons.cloud_circle_outlined),
+            ),
+            _HomeTabButton(
+              groupValue: selectedTab,
+              value: HomeTab.allEntries,
               icon: const Icon(Icons.list_rounded),
             ),
             _HomeTabButton(

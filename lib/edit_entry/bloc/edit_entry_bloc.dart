@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:entries_api/entries_api.dart';
 import 'package:entries_repository/entries_repository.dart';
 import 'package:equatable/equatable.dart';
 
@@ -15,10 +16,27 @@ class EditEntryBloc extends Bloc<EditEntryEvent, EditEntryState> {
             initialEntry: initialEntry,
             title: initialEntry?.title ?? '',
             notes: initialEntry?.notes ?? '',
+            source: initialEntry?.source,
+            relatedUrl: initialEntry?.relatedUrl,
+            frequencyType: 
+              initialEntry?.frequencyType ?? FrequencyType.periodically,
+            frequencyInDays: 
+              initialEntry?.frequencyInDays ?? 
+              [1, 2, 4, 7, 14, 21, 30, 60, 90, 180, 365],
+            entryPriority: initialEntry?.entryPriority ?? EntryPriority.normal,
+            isActive: initialEntry?.isActive ?? true,
+            activationDate: initialEntry?.activationDate ?? null,
           ),
         ) {
     on<EditEntryTitleChanged>(_onTitleChanged);
     on<EditEntryNotesChanged>(_onNotesChanged);
+    on<EditEntrySourceChanged>(_onSourceChanged);
+    on<EditEntryRelatedUrlChanged>(_onRelatedUrlChanged);
+    on<EditEntryFrequencyTypeChanged>(_onFrequencyTypeChanged);
+    on<EditEntryFrequencyInDaysChanged>(_onFrequencyInDaysChanged);
+    on<EditEntryEntryPriorityChanged>(_onEntryPriorityChanged);
+    on<EditEntryIsActiveChanged>(_onIsActiveChanged);
+    on<EditEntryActivationDateChanged>(_onActivationDateChanged);
     on<EditEntrySubmitted>(_onSubmitted);
   }
 
@@ -38,6 +56,71 @@ class EditEntryBloc extends Bloc<EditEntryEvent, EditEntryState> {
     emit(state.copyWith(notes: event.notes));
   }
 
+  void _onSourceChanged(
+    EditEntrySourceChanged event,
+    Emitter<EditEntryState> emit,
+  ) {
+    emit(state.copyWith(source: event.source));
+  }
+
+  void _onRelatedUrlChanged(
+    EditEntryRelatedUrlChanged event,
+    Emitter<EditEntryState> emit,
+  ) {
+    emit(state.copyWith(relatedUrl: event.relatedUrl));
+  }
+
+  void _onFrequencyTypeChanged(
+    EditEntryFrequencyTypeChanged event,
+    Emitter<EditEntryState> emit,
+  ) {
+    emit(state.copyWith(frequencyType: event.frequencyType));
+  }
+
+  void _onFrequencyInDaysChanged(
+    EditEntryFrequencyInDaysChanged event,
+    Emitter<EditEntryState> emit,
+  ) {
+
+    // TODO(Corey): Clean this up when you know wtf you are doing
+    final digitsOnly = RegExp('[^0-9]+');
+    
+    final toListOfStrings = event.frequencyInDays
+      .replaceAll(digitsOnly, ' ')
+      .split(' ');
+
+    final parsed = <int>[];
+    
+    for (final x in toListOfStrings) {
+      parsed.add(int.parse(x));
+    }
+
+    parsed.sort();
+
+    emit(state.copyWith(frequencyInDays: parsed));
+  }
+
+void _onEntryPriorityChanged(
+  EditEntryEntryPriorityChanged event,
+  Emitter<EditEntryState> emit,
+) {
+  emit(state.copyWith(entryPriority: event.entryPriority));
+}
+
+void _onIsActiveChanged(
+  EditEntryIsActiveChanged event,
+  Emitter<EditEntryState> emit,
+) {
+  emit(state.copyWith(isActive: event.isActive));
+}
+
+void _onActivationDateChanged (
+  EditEntryActivationDateChanged event,
+  Emitter<EditEntryState> emit,
+) {
+  emit(state.copyWith(activationDate: event.activationDate));
+}
+
   Future<void> _onSubmitted(
     EditEntrySubmitted event,
     Emitter<EditEntryState> emit,
@@ -46,6 +129,13 @@ class EditEntryBloc extends Bloc<EditEntryEvent, EditEntryState> {
     final entry = (state.initialEntry ?? Entry(title: '', notes: '',)).copyWith(
       title: state.title,
       notes: state.notes,
+      source: state.source,
+      relatedUrl: state.relatedUrl,
+      frequencyType: state.frequencyType,
+      frequencyInDays: state.frequencyInDays,
+      entryPriority: state.entryPriority,
+      activationDate: state.activationDate,
+      isActive: state.isActive,
     );
 
     try {

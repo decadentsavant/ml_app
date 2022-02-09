@@ -87,6 +87,8 @@ class AllEntriesView extends StatelessWidget {
                 return Center(
                   child: Text(
                     'You have no entries. Make some!',
+                    // TODO(Corey): Likely a message for new people.
+                    // Link to a video on your website
                     style: Theme.of(context).textTheme.caption,
                   ),
                 );

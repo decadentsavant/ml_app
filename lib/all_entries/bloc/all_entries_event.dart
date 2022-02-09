@@ -11,14 +11,14 @@ class AllEntriesSubscriptionRequested extends AllEntriesEvent {
   const AllEntriesSubscriptionRequested();
 }
 
-class AllEntriesEntrySaved extends AllEntriesEvent {
-  const AllEntriesEntrySaved(this.entry);
+// class AllEntriesEntrySaved extends AllEntriesEvent {
+//   const AllEntriesEntrySaved(this.entry);
 
-  final Entry entry;
+//   final Entry entry;
 
-  @override
-  List<Object> get props => [entry];
-}
+//   @override
+//   List<Object> get props => [entry];
+// }
 
 class AllEntriesIsActiveToggled extends AllEntriesEvent {
   const AllEntriesIsActiveToggled({
