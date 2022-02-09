@@ -25,7 +25,7 @@ class EditEntryBloc extends Bloc<EditEntryEvent, EditEntryState> {
               [1, 2, 4, 7, 14, 21, 30, 60, 90, 180, 365],
             entryPriority: initialEntry?.entryPriority ?? EntryPriority.normal,
             isActive: initialEntry?.isActive ?? true,
-            activationDate: initialEntry?.activationDate ?? null,
+            activationDate: initialEntry?.activationDate,
           ),
         ) {
     on<EditEntryTitleChanged>(_onTitleChanged);

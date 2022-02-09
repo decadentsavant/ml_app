@@ -308,16 +308,15 @@ class _ActivationDateField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<EditEntryBloc>().state;
-    final formatter = DateFormat('MMMM d yyyy H : m');
-    final actualValue = state.activationDate;
-    final problemValue = formatter.format(DateTime.now());
-
-    
+    // TODO(Corey): Remove hh:mm before production
+    final formatter = DateFormat('MMMM d yyyy hh:mm');
+    final convertUtcToLocal = state.activationDate?.toLocal();
+    final displayDate = formatter.format(convertUtcToLocal!);
 
     return TextFormField(
       enabled: false,
       key: const Key('editEntryView_activationDate_textFormField'),
-      initialValue: problemValue,
+      initialValue: displayDate,
       decoration: InputDecoration(
         enabled: !state.status.isLoadingOrSuccess,
         labelText: 'Date you began this learning repetition:',
