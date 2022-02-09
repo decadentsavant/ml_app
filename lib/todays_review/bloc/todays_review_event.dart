@@ -6,3 +6,7 @@ abstract class TodaysReviewEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class TodaysReviewSubscriptionRequested extends TodaysReviewEvent {
+  const TodaysReviewSubscriptionRequested();
+}

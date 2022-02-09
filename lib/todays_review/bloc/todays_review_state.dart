@@ -1,10 +1,25 @@
 part of 'todays_review_bloc.dart';
 
-abstract class TodaysReviewState extends Equatable {
-  const TodaysReviewState();
-  
-  @override
-  List<Object> get props => [];
-}
+enum TodaysReviewStatus { initial, loading, success, failure }
 
-class TodaysReviewInitial extends TodaysReviewState {}
+class TodaysReviewState extends Equatable {
+  const TodaysReviewState({
+    this.status = TodaysReviewStatus.initial,
+    this.entries = const [],
+  });
+
+  final TodaysReviewStatus status;
+  final List<Entry> entries;
+
+  TodaysReviewState copyWith({
+    TodaysReviewStatus Function()? status,
+    List<Entry> Function()? entries,
+    }) {
+      return TodaysReviewState(
+        entries: entries != null ? entries() : this.entries, 
+        status:  status != null ? status() : this.status,);
+    }
+
+  @override 
+  List<Object?> get props => [status, entries];
+}
