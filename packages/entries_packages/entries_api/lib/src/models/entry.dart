@@ -46,8 +46,8 @@ class Entry extends Equatable {
   Entry({
     String? id,
     required this.title,
-    this.source,
     required this.notes,
+    this.source,
     this.relatedUrl,
     this.frequencyType = FrequencyType.periodically,
     this.frequencyInDays = const [1, 2, 4, 7, 14, 21, 30, 60, 90, 180, 365],
@@ -59,12 +59,7 @@ class Entry extends Equatable {
           'id can not be null and should not be empty',
         ),
         id = id ?? const Uuid().v4(),
-        // TODO(Corey): This code fails but above is fine.
-        // assert(
-        //   activationDate == null,
-        //   'activationDate can not be null and should not be empty',
-        // ),
-        activationDate = activationDate ?? DateTime.now();
+        activationDate = activationDate ?? DateTime.now().toUtc();
 
   /// The entry's id.
   ///
@@ -78,7 +73,7 @@ class Entry extends Equatable {
 
   /// The entry's source.
   ///
-  /// The title may be empty.
+  /// The source may be empty.
   final String? source;
 
   /// The entry's notes.
@@ -108,7 +103,7 @@ class Entry extends Equatable {
 
   /// The entry's date of activation.
   ///
-  /// Cannot be empty. Initialzied with argument or [DateTime].now().
+  /// Cannot be empty. Initialzied with argument or via [DateTime].now().
   final DateTime activationDate;
 
   /// Indicates the entry should still have at least one recurrance
@@ -121,8 +116,9 @@ class Entry extends Equatable {
   Entry copyWith({
     String? id,
     String? title,
-    String? source,
     String? notes,
+    String? source,
+    String? relatedUrl,
     FrequencyType? frequencyType,
     List<int>? frequencyInDays,
     EntryPriority? entryPriority,
@@ -132,8 +128,9 @@ class Entry extends Equatable {
     return Entry(
       id: id ?? this.id,
       title: title ?? this.title,
-      source: source ?? this.source,
       notes: notes ?? this.notes,
+      source: source ?? this.source,
+      relatedUrl: relatedUrl ?? this.relatedUrl,
       frequencyType: frequencyType ?? this.frequencyType,
       frequencyInDays: frequencyInDays ?? this.frequencyInDays,
       entryPriority: entryPriority ?? this.entryPriority,
@@ -149,11 +146,12 @@ class Entry extends Equatable {
   JsonMap toJson() => _$EntryToJson(this);
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         id,
         title,
-        // source, Can't call on String?
         notes,
+        source,
+        relatedUrl,
         frequencyType,
         frequencyInDays,
         entryPriority,

@@ -16,8 +16,8 @@ Entry _$EntryFromJson(Map<String, dynamic> json) => $checkedCreate(
         final val = Entry(
           id: $checkedConvert('id', (v) => v as String?),
           title: $checkedConvert('title', (v) => v as String),
-          source: $checkedConvert('source', (v) => v as String?),
           notes: $checkedConvert('notes', (v) => v as String),
+          source: $checkedConvert('source', (v) => v as String?),
           relatedUrl: $checkedConvert('related_url', (v) => v as String?),
           frequencyType: $checkedConvert(
               'frequency_type',
@@ -36,7 +36,7 @@ Entry _$EntryFromJson(Map<String, dynamic> json) => $checkedCreate(
                   EntryPriority.normal),
           activationDate: $checkedConvert('activation_date',
               (v) => v == null ? null : DateTime.parse(v as String)),
-          isActive: $checkedConvert('is_active', (v) => v as bool? ?? false),
+          isActive: $checkedConvert('is_active', (v) => v as bool? ?? true),
         );
         return val;
       },
