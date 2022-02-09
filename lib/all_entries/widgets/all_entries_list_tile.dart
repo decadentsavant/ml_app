@@ -65,7 +65,7 @@ class AllEntriesListTile extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
         subtitle: Text(
-          entry.activationDate.toString(),
+          entry.notes,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),

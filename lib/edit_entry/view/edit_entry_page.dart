@@ -109,7 +109,7 @@ class _TitleField extends StatelessWidget {
       decoration: InputDecoration(
         enabled: !state.status.isLoadingOrSuccess,
         labelText: 'Title',
-        hintText: 'simple & concise',
+        hintText: 'Concise recap',
       ),
       maxLength: 50,
       inputFormatters: [
@@ -135,7 +135,7 @@ class _NotesField extends StatelessWidget {
       decoration: InputDecoration(
         enabled: !state.status.isLoadingOrSuccess,
         labelText: 'Learning Entry',
-        hintText: 'Hammer this into my brain!',
+        hintText: 'Hammer this into my brain, please!',
       ),
       maxLength: 300,
       maxLines: 7,

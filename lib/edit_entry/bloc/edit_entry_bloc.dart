@@ -35,6 +35,7 @@ class EditEntryBloc extends Bloc<EditEntryEvent, EditEntryState> {
     on<EditEntryFrequencyTypeChanged>(_onFrequencyTypeChanged);
     on<EditEntryFrequencyInDaysChanged>(_onFrequencyInDaysChanged);
     on<EditEntryEntryPriorityChanged>(_onEntryPriorityChanged);
+    // TODO(Corey): Add 'archive' with '...IsActive...' toggle below
     on<EditEntryIsActiveChanged>(_onIsActiveChanged);
     on<EditEntryActivationDateChanged>(_onActivationDateChanged);
     on<EditEntrySubmitted>(_onSubmitted);
