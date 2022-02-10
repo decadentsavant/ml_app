@@ -10,3 +10,11 @@ abstract class TodaysReviewEvent extends Equatable {
 class TodaysReviewSubscriptionRequested extends TodaysReviewEvent {
   const TodaysReviewSubscriptionRequested();
 }
+class TodaysReviewUrlLaunchRequested extends TodaysReviewEvent {
+  const TodaysReviewUrlLaunchRequested(this.url);
+
+  final String url;
+
+  @override 
+  List<Object> get props => [url];
+}
