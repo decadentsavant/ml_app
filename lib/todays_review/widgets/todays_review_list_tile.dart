@@ -17,7 +17,6 @@ class TodaysReviewListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final _entryTitle = entry.title;
     final _entrySource = entry.source;
-    final _entryActivationDate = entry.activationDate;
     final _entryNotes = entry.notes;
     final _entryUrl = entry.relatedUrl;
 
@@ -45,7 +44,7 @@ class TodaysReviewListTile extends StatelessWidget {
                           child: const Icon(Icons.link, size: 18),
                         ),
                       ),
-                    )
+                    ),
             ),
             Text(_entryNotes),
             TextButton(onPressed: onTap, child: const Text('...'))

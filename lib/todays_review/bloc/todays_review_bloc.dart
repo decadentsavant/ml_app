@@ -41,22 +41,31 @@ class TodaysReviewBloc extends Bloc<TodaysReviewEvent, TodaysReviewState> {
     TodaysReviewUrlLaunchRequested event,
     Emitter<TodaysReviewState> emit,
   ) async {
-    emit(state.copyWith(status: () => TodaysReviewStatus.loading,));
-    // TODO(Corey): Handle failure states with modal or something for user.
-    // Ensure validation at input level. Note: www criteria below...overkill.
-    final regExp = RegExp(
-        r'^((?:.|\n)*?)((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?)',);
-    if (event.url.isEmpty) {
+    emit(
+      state.copyWith(
+        status: () => TodaysReviewStatus.loading,
+      ),
+    );
+
+  // TODO(Corey): This code still has problems with some sites.
+  // MostLearned.com for some reason; Google thinks its phishing and the OS 
+  // returns a platform error. Poorly formatted addresses fail as well. 
+  // For example, the string 'google' without the '.com'. Can be overcome with
+  // form validation, but don't copy paste this and it expect it to 
+  // work everywhere.
+    final result = await canLaunch(event.url);
+    if (!result) {
       emit(state.copyWith(status: () => TodaysReviewStatus.failure));
-      return;
-    } else if (!regExp.hasMatch(event.url)) {
-      // failure if url doesn't start with 'www'
-      emit(state.copyWith(status: () => TodaysReviewStatus.failure));
-      return;
-    } else {
-      unawaited(launch(event.url));
-      emit(state.copyWith(status: () => TodaysReviewStatus.success));
-      return;
     }
+    if (result) {
+      if (event.url.contains('http://') || event.url.contains('https://')) {
+        await launch(event.url);
+      }
+    } else {
+      final newUrl = 'https://${event.url}';
+      await launch(newUrl);
+    }
+
+    emit(state.copyWith(status: () => TodaysReviewStatus.success));
   }
 }
