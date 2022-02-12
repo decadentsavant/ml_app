@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:entries_api/entries_api.dart';
 import 'package:entries_repository/entries_repository.dart';
 import 'package:equatable/equatable.dart';
+import 'package:ml_app/shared_components/shared_components.dart';
 
 part 'edit_entry_event.dart';
 part 'edit_entry_state.dart';
@@ -18,11 +19,10 @@ class EditEntryBloc extends Bloc<EditEntryEvent, EditEntryState> {
             notes: initialEntry?.notes ?? '',
             source: initialEntry?.source,
             relatedUrl: initialEntry?.relatedUrl,
-            frequencyType: 
-              initialEntry?.frequencyType ?? FrequencyType.periodically,
-            frequencyInDays: 
-              initialEntry?.frequencyInDays ?? 
-              [1, 2, 4, 7, 14, 21, 30, 60, 90, 180, 365],
+            frequencyType:
+                initialEntry?.frequencyType ?? FrequencyType.periodically,
+            frequencyInDays: initialEntry?.frequencyInDays ??
+                [1, 2, 4, 7, 14, 21, 30, 60, 90, 180, 365],
             entryPriority: initialEntry?.entryPriority ?? EntryPriority.normal,
             isActive: initialEntry?.isActive ?? true,
             activationDate: initialEntry?.activationDate,
@@ -82,52 +82,62 @@ class EditEntryBloc extends Bloc<EditEntryEvent, EditEntryState> {
     EditEntryFrequencyInDaysChanged event,
     Emitter<EditEntryState> emit,
   ) {
-
-    // TODO(Corey): Clean this up when you know wtf you are doing
+    // Replace string with sorted list of integers
     final digitsOnly = RegExp('[^0-9]+');
-    
-    final toListOfStrings = event.frequencyInDays
-      .replaceAll(digitsOnly, ' ')
-      .split(' ');
-
+    final toListOfStrings =
+        event.frequencyInDays.replaceAll(digitsOnly, ' ').split(' ');
     final parsed = <int>[];
-    
     for (final x in toListOfStrings) {
       parsed.add(int.parse(x));
     }
-
     parsed.sort();
 
     emit(state.copyWith(frequencyInDays: parsed));
   }
 
-void _onEntryPriorityChanged(
-  EditEntryEntryPriorityChanged event,
-  Emitter<EditEntryState> emit,
-) {
-  emit(state.copyWith(entryPriority: event.entryPriority));
-}
+  void _onEntryPriorityChanged(
+    EditEntryEntryPriorityChanged event,
+    Emitter<EditEntryState> emit,
+  ) {
+    emit(state.copyWith(entryPriority: event.entryPriority));
+  }
 
-void _onIsActiveChanged(
-  EditEntryIsActiveChanged event,
-  Emitter<EditEntryState> emit,
-) {
-  emit(state.copyWith(isActive: event.isActive));
-}
+  void _onIsActiveChanged(
+    EditEntryIsActiveChanged event,
+    Emitter<EditEntryState> emit,
+  ) {
+    emit(state.copyWith(isActive: event.isActive));
+  }
 
-void _onActivationDateChanged (
-  EditEntryActivationDateChanged event,
-  Emitter<EditEntryState> emit,
-) {
-  emit(state.copyWith(activationDate: event.activationDate));
-}
+  void _onActivationDateChanged(
+    EditEntryActivationDateChanged event,
+    Emitter<EditEntryState> emit,
+  ) {
+    emit(state.copyWith(activationDate: event.activationDate));
+  }
 
   Future<void> _onSubmitted(
     EditEntrySubmitted event,
     Emitter<EditEntryState> emit,
   ) async {
     emit(state.copyWith(status: EditEntryStatus.loading));
-    final entry = (state.initialEntry ?? Entry(title: '', notes: '',)).copyWith(
+
+    if (state.relatedUrl != null && !isURL(state.relatedUrl!)) {
+      emit(
+        state.copyWith(
+          monitorRelatedUrl: true,
+          status: EditEntryStatus.initial,
+        ),
+      );
+      return;
+    }
+
+    final entry = (state.initialEntry ??
+            Entry(
+              title: '',
+              notes: '',
+            ))
+        .copyWith(
       title: state.title,
       notes: state.notes,
       source: state.source,

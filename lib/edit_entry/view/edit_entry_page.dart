@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ml_app/edit_entry/edit_entry.dart';
+import 'package:ml_app/shared_components/shared_components.dart';
 
 class EditEntryPage extends StatelessWidget {
   const EditEntryPage({Key? key}) : super(key: key);
@@ -181,11 +182,16 @@ class _RelatedUrlField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<EditEntryBloc>().state;
+    final needsMonitoring = 
+      context.read<EditEntryBloc>().state.monitorRelatedUrl == true;
 
     return TextFormField(
       key: const Key('editEntryView_relatedUrl_textFormField'),
       initialValue: state.relatedUrl,
       decoration: InputDecoration(
+        errorText: (needsMonitoring && !isURL(state.relatedUrl!))
+        ? 'URL is not valid'
+        : null,
         enabled: !state.status.isLoadingOrSuccess,
         labelText: 'RelatedUrl',
         hintText: 'To refresh later...',
@@ -300,7 +306,6 @@ class _EntryPriority extends StatelessWidget {
     );
   }
 }
-
 
 class _ActivationDateField extends StatelessWidget {
   const _ActivationDateField({Key? key}) : super(key: key);

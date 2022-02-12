@@ -13,6 +13,7 @@ class EditEntryState extends Equatable {
   const EditEntryState({
     this.status = EditEntryStatus.initial,
     this.initialEntry,
+    this.monitorRelatedUrl = false,
     this.title = '',
     this.notes = '',
     this.source = '',
@@ -26,6 +27,7 @@ class EditEntryState extends Equatable {
 
   final EditEntryStatus status;
   final Entry? initialEntry;
+  final bool monitorRelatedUrl;
   final String? title;
   final String? notes;
   final String? source;
@@ -41,6 +43,7 @@ class EditEntryState extends Equatable {
   EditEntryState copyWith({
     EditEntryStatus? status,
     Entry? initialEntry,
+    bool? monitorRelatedUrl,
     String? title,
     String? notes,
     String? source,
@@ -54,6 +57,7 @@ class EditEntryState extends Equatable {
     return EditEntryState(
       status: status ?? this.status,
       initialEntry: initialEntry ?? this.initialEntry,
+      monitorRelatedUrl: monitorRelatedUrl ?? this.monitorRelatedUrl,
       title: title ?? this.title,
       notes: notes ?? this.notes,
       source: source ?? this.source,
