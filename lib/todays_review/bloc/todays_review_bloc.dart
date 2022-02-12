@@ -47,23 +47,23 @@ class TodaysReviewBloc extends Bloc<TodaysReviewEvent, TodaysReviewState> {
       ),
     );
 
-  // TODO(Corey): This code still has problems with some sites.
-  // MostLearned.com for some reason; Google thinks its phishing and the OS 
-  // returns a platform error. Poorly formatted addresses fail as well. 
-  // For example, the string 'google' without the '.com'. Can be overcome with
-  // form validation, but don't copy paste this and it expect it to 
-  // work everywhere.
     final result = await canLaunch(event.url);
-    if (!result) {
-      emit(state.copyWith(status: () => TodaysReviewStatus.failure));
-    }
-    if (result) {
-      if (event.url.contains('http://') || event.url.contains('https://')) {
+
+    // 1) Trusts form validation's URL criteria
+    // 2) Assumes site is accessible via https:
+    // 3) Unsure if uri encode/decode is needed
+    try {
+      if (result) {
         await launch(event.url);
+      } else {
+        final newUrl = 'https://${event.url}';
+        await launch(newUrl);
       }
-    } else {
-      final newUrl = 'https://${event.url}';
-      await launch(newUrl);
+    } catch (e) {
+      // If browser suspects phishing it throws platform exception.
+      // This try catch block prevents app from halting operation.
+      // The browser gives UI feedback on failure. No action needed here.
+      return;
     }
 
     emit(state.copyWith(status: () => TodaysReviewStatus.success));

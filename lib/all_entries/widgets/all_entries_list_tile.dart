@@ -18,24 +18,6 @@ class AllEntriesListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    // TODO(Corey): Color the source maybe using technique below
-    // var text = RichText(
-    //   text: TextSpan(
-    //     style: TextStyle(
-    //       fontSize: theme.textTheme.bodyText1?.fontSize,
-    //       color: theme.textTheme.bodyText1?.color,
-    //     ),
-    //     children: <TextSpan>[
-    //       TextSpan(text: entryTitle),
-    //       TextSpan(
-    //         text: entrySource,
-    //         style: TextStyle(
-    //           color: theme.textTheme.caption?.color,
-    //         ),
-    //       )
-    //     ],
-    //   ),
-    // );
 
     return Dismissible(
       key: Key('allEntriesListTile_dismissible_${entry.id}'),
