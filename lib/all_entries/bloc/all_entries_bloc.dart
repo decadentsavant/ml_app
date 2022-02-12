@@ -12,7 +12,6 @@ class AllEntriesBloc extends Bloc<AllEntriesEvent, AllEntriesState> {
   })  : _entriesRepository = entriesRepository,
         super(const AllEntriesState()) {
     on<AllEntriesSubscriptionRequested>(_onSubscriptionRequested);
-    // on<AllEntriesEntrySaved>(_onEntrySaved);
     on<AllEntriesIsActiveToggled>(_onIsActiveToggled);
     on<AllEntriesEntryDeleted>(_onEntryDeleted);
     on<AllEntriesUndoDeletionRequested>(_onUndoDeletionRequested);
@@ -40,13 +39,6 @@ class AllEntriesBloc extends Bloc<AllEntriesEvent, AllEntriesState> {
       ),
     );
   }
-
-  // Future<void> _onEntrySaved(
-  //   AllEntriesEntrySaved event,
-  //   Emitter<AllEntriesState> emit,
-  // ) async {
-  //   await _entriesRepository.saveEntry(event.entry);
-  // }
 
   Future<void> _onIsActiveToggled(
     AllEntriesIsActiveToggled event,

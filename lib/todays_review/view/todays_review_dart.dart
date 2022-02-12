@@ -41,7 +41,8 @@ class TodaysReviewPageView extends StatelessWidget {
               return Center(
                 child: Text(
                 // ignore: lines_longer_than_80_chars
-                  'You have no learnings to review today. Add enough to ensure you are improving every day!',
+                  'You have no learnings to review today. '
+                  'Add enough to ensure you are improving every day!',
                   style: Theme.of(context).textTheme.caption,
                 ),
               );
