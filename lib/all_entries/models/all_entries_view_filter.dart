@@ -1,5 +1,3 @@
-
-
 import 'package:entries_repository/entries_repository.dart';
 
 enum AllEntriesViewFilter { all, activeOnly, archiveOnly }
@@ -17,6 +15,8 @@ extension AllEntriesViewFilterX on AllEntriesViewFilter {
   }
 
   Iterable<Entry> applyAll(Iterable<Entry> entries) {
-    return entries.where(apply);
+    final filteredAndSorted = entries.where(apply).toList()
+      ..sort((a, b) => b.activationDate.compareTo(a.activationDate));
+    return filteredAndSorted;
   }
 }
