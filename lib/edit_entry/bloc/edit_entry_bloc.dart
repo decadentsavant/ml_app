@@ -87,7 +87,9 @@ class EditEntryBloc extends Bloc<EditEntryEvent, EditEntryState> {
         event.frequencyInDays.replaceAll(digitsOnly, ' ').split(' ');
     final parsed = <int>[];
     for (final x in toListOfStrings) {
+      if (x.isNotEmpty) {
       parsed.add(int.parse(x));
+      }
     }
     parsed.sort();
 
