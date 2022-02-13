@@ -1,4 +1,3 @@
-import 'package:entries_api/entries_api.dart';
 import 'package:entries_repository/entries_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';

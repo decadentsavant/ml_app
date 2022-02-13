@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:entries_api/entries_api.dart';
 import 'package:entries_repository/entries_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ml_app/shared_components/shared_components.dart';
