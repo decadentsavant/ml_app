@@ -54,7 +54,7 @@ class Entry extends Equatable {
     this.entryPriority = EntryPriority.normal,
     DateTime? activationDate,
     this.isActive = true,
-  })  : assert(
+  }) : assert(
           id == null || id.isNotEmpty,
           'id can not be null and should not be empty',
         ),
@@ -125,6 +125,15 @@ class Entry extends Equatable {
     DateTime? activationDate,
     bool? isActive,
   }) {
+    assert(
+      !(frequencyType == FrequencyType.daily && frequencyInDays!.length != 1),
+      'frequencyInDays must have a length of 1 for dailies',
+    );
+    assert(
+      !(frequencyType == FrequencyType.periodically &&
+          frequencyInDays!.isEmpty),
+      'Periodicals cannot have empty frequencyInDays',
+    );
     return Entry(
       id: id ?? this.id,
       title: title ?? this.title,
