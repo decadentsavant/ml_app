@@ -255,7 +255,7 @@ class _FrequencyInDaysField extends StatelessWidget {
       decoration: InputDecoration(
         enabled: !state.status.isLoadingOrSuccess,
         labelText: 'Frequency In days',
-        hintText: 'Numbers and text only',
+        hintText: 'Numbers and commas only',
       ),
       maxLength: 100,
       inputFormatters: [
