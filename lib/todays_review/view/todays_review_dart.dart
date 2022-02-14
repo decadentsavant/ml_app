@@ -24,15 +24,23 @@ class TodaysReviewPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dummy =
+        DummData(entriesRepository: context.read<EntriesRepository>());
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           "Today's Review",
         ),
+        actions: [
+          IconButton(
+            onPressed: dummy.uploadDummyData,
+            icon: const Icon(Icons.ac_unit_outlined),
+          )
+        ],
       ),
       body: BlocBuilder<TodaysReviewBloc, TodaysReviewState>(
         builder: (context, state) {
-          if (state.entries.isEmpty) {
+          if (state.filteredEntries.isEmpty) {
             if (state.status == TodaysReviewStatus.loading) {
               return const Center(child: CupertinoActivityIndicator());
             } else if (state.status != TodaysReviewStatus.success) {
@@ -40,7 +48,7 @@ class TodaysReviewPageView extends StatelessWidget {
             } else {
               return Center(
                 child: Text(
-                // ignore: lines_longer_than_80_chars
+                  // ignore: lines_longer_than_80_chars
                   'You have no learnings to review today. '
                   'Add enough to ensure you are improving every day!',
                   style: Theme.of(context).textTheme.caption,
@@ -50,8 +58,9 @@ class TodaysReviewPageView extends StatelessWidget {
           }
           return CupertinoScrollbar(
             child: ListView(
+              primary: false,
               children: [
-                for (final entry in state.entries)
+                for (final entry in state.filteredEntries)
                   TodaysReviewListTile(
                     entry: entry,
                     onTap: () {

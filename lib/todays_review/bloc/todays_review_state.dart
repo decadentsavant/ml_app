@@ -11,15 +11,19 @@ class TodaysReviewState extends Equatable {
   final TodaysReviewStatus status;
   final List<Entry> entries;
 
+  Iterable<Entry> get filteredEntries =>
+      createTodaysReviewList(entries: entries);
+
   TodaysReviewState copyWith({
     TodaysReviewStatus Function()? status,
     List<Entry> Function()? entries,
-    }) {
-      return TodaysReviewState(
-        entries: entries != null ? entries() : this.entries, 
-        status:  status != null ? status() : this.status,);
-    }
+  }) {
+    return TodaysReviewState(
+      entries: entries != null ? entries() : this.entries,
+      status: status != null ? status() : this.status,
+    );
+  }
 
-  @override 
+  @override
   List<Object?> get props => [status, entries];
 }
