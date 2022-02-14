@@ -4,7 +4,7 @@ enum HomeTab { todaysReview, allEntries, stats }
 
 class HomeState extends Equatable {
   const HomeState({
-    this.tab = HomeTab.allEntries,
+    this.tab = HomeTab.todaysReview,
   });
 
   final HomeTab tab;

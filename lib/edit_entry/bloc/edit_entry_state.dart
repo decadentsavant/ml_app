@@ -7,7 +7,7 @@ extension EditEntryStatusX on EditEntryStatus {
         EditEntryStatus.loading,
         EditEntryStatus.success,
       ].contains(this);
-}
+} 
 
 class EditEntryState extends Equatable {
   const EditEntryState({
