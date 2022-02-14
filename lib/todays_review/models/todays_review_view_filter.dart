@@ -50,10 +50,10 @@ List<Entry> createTodaysReviewList({required List<Entry> entries}) {
     if (entry.frequencyInDays
         .map(
           (e) => DateFormat.yMMMd()
-              .format(entry.activationDate.add(Duration(days: e))),
+              .format(entry.activationDate.toLocal().add(Duration(days: e))),
         )
         .toList()
-        .contains(DateFormat.yMMMd().format(DateTime.now()))) {
+        .contains(DateFormat.yMMMd().format(timeStamp))) {
       results.add(entry);
     }
   }
