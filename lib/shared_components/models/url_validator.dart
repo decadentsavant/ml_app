@@ -74,7 +74,10 @@ bool isURL(String str,
     bool allowUnderscore = false,
     List<String> hostWhitelist = const [],
     List<String> hostBlacklist = const []}) {
-  if (str.length == 0 ||
+  if (str.length == 0) {
+    return true;
+  }
+  if (/*str.length == 0 ||*/
       str.length > 2083 ||
       str.startsWith('mailto:')) {
     return false;

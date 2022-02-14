@@ -144,7 +144,7 @@ class EditEntryBloc extends Bloc<EditEntryEvent, EditEntryState> {
       title: state.title,
       notes: state.notes,
       source: state.source,
-      relatedUrl: state.relatedUrl,
+      relatedUrl: state.relatedUrl?.trim(),
       frequencyType: state.frequencyType,
       // toSet() -> .toList() to remove any duplicates
       frequencyInDays: state.frequencyInDays?.toSet().toList(),
