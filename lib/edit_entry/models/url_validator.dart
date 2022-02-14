@@ -67,7 +67,7 @@ bool isFQDN(String str,
 /// * [hostBlacklist] sets the list of disallowed hosts
 ///
 
-bool isURL(String str,
+bool isValidURL(String str,
     {List<String> protocols = const ['http', 'https', 'ftp'],
     bool requireTld = true,
     bool requireProtocol = false,

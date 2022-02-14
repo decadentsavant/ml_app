@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ml_app/edit_entry/edit_entry.dart';
-import 'package:ml_app/shared_components/shared_components.dart';
 
 class EditEntryPage extends StatelessWidget {
   const EditEntryPage({Key? key}) : super(key: key);
@@ -102,11 +101,15 @@ class _TitleField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<EditEntryBloc>().state;
+    final needsMonitoring = context.read<EditEntryBloc>().state.monitor;
 
     return TextFormField(
       key: const Key('editEntryView_title_textFormField'),
       initialValue: state.title,
       decoration: InputDecoration(
+        errorText: !isValidTitleOrNotes(string: state.title!) && needsMonitoring
+            ? 'Gimme a title! ...please.'
+            : null,
         enabled: !state.status.isLoadingOrSuccess,
         labelText: 'Title',
         hintText: 'Concise recap',
@@ -128,11 +131,15 @@ class _NotesField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<EditEntryBloc>().state;
+    final needsMonitoring = context.read<EditEntryBloc>().state.monitor;
 
     return TextFormField(
       key: const Key('editEntryView_notes_textFormField'),
       initialValue: state.notes,
       decoration: InputDecoration(
+        errorText: !isValidTitleOrNotes(string: state.notes!) && needsMonitoring
+            ? 'What are you going to reinforce?'
+            : null,
         enabled: !state.status.isLoadingOrSuccess,
         labelText: 'Learning Entry',
         hintText: 'Hammer this into my brain, please!',
@@ -181,16 +188,15 @@ class _RelatedUrlField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<EditEntryBloc>().state;
-    final needsMonitoring = 
-      context.read<EditEntryBloc>().state.monitorRelatedUrl == true;
+    final needsMonitoring = context.read<EditEntryBloc>().state.monitor;
 
     return TextFormField(
       key: const Key('editEntryView_relatedUrl_textFormField'),
       initialValue: state.relatedUrl,
       decoration: InputDecoration(
-        errorText: (needsMonitoring && !isURL(state.relatedUrl!))
-        ? 'URL is not valid'
-        : null,
+        errorText: (needsMonitoring && !isValidURL(state.relatedUrl!))
+            ? 'URL is not valid'
+            : null,
         enabled: !state.status.isLoadingOrSuccess,
         labelText: 'RelatedUrl',
         hintText: 'To refresh later...',
@@ -248,11 +254,19 @@ class _FrequencyInDaysField extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = context.watch<EditEntryBloc>().state;
     final initialValue = state.frequencyInDays?.join(', ');
+    final needsMonitoring = context.read<EditEntryBloc>().state.monitor;
 
     return TextFormField(
       key: const Key('editEntryView_frequencyInDays_textFormField'),
       initialValue: initialValue,
       decoration: InputDecoration(
+        errorText: (needsMonitoring &&
+                !isValidFrequencyInDays(
+                  integers: state.frequencyInDays!,
+                  frequencyType: state.frequencyType!,
+                ))
+            ? 'See information icon above for details'
+            : null,
         enabled: !state.status.isLoadingOrSuccess,
         labelText: 'Frequency In days',
         hintText: 'Numbers and commas only',

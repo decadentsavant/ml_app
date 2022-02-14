@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:entries_repository/entries_repository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:ml_app/shared_components/shared_components.dart';
+
+import 'package:ml_app/edit_entry/models/models.dart';
 
 part 'edit_entry_event.dart';
 part 'edit_entry_state.dart';
@@ -34,7 +35,6 @@ class EditEntryBloc extends Bloc<EditEntryEvent, EditEntryState> {
     on<EditEntryFrequencyTypeChanged>(_onFrequencyTypeChanged);
     on<EditEntryFrequencyInDaysChanged>(_onFrequencyInDaysChanged);
     on<EditEntryEntryPriorityChanged>(_onEntryPriorityChanged);
-    // TODO(Corey): Add 'archive' with '...IsActive...' toggle below
     on<EditEntryIsActiveChanged>(_onIsActiveChanged);
     on<EditEntryActivationDateChanged>(_onActivationDateChanged);
     on<EditEntrySubmitted>(_onSubmitted);
@@ -88,7 +88,7 @@ class EditEntryBloc extends Bloc<EditEntryEvent, EditEntryState> {
     final parsed = <int>[];
     for (final x in toListOfStrings) {
       if (x.isNotEmpty) {
-      parsed.add(int.parse(x));
+        parsed.add(int.parse(x));
       }
     }
     parsed.sort();
@@ -123,12 +123,17 @@ class EditEntryBloc extends Bloc<EditEntryEvent, EditEntryState> {
   ) async {
     emit(state.copyWith(status: EditEntryStatus.loading));
 
-    // If the submitted URL isn't valid, begin monitoring the field
-    // to provide feedback in the UI.
-    if (state.relatedUrl != null && !isURL(state.relatedUrl!)) {
+    // If one of the checks fails, start monitorig and give UI feedback
+    if (!isValidTitleOrNotes(string: state.title!) ||
+        !isValidTitleOrNotes(string: state.notes!) ||
+        !isValidFrequencyInDays(
+          integers: state.frequencyInDays!,
+          frequencyType: state.frequencyType!,
+        ) ||
+        (state.relatedUrl != null && !isValidURL(state.relatedUrl!))) {
       emit(
         state.copyWith(
-          monitorRelatedUrl: true,
+          monitor: true,
           status: EditEntryStatus.initial,
         ),
       );
