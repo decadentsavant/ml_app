@@ -123,6 +123,8 @@ class EditEntryBloc extends Bloc<EditEntryEvent, EditEntryState> {
   ) async {
     emit(state.copyWith(status: EditEntryStatus.loading));
 
+    // If the submitted URL isn't valid, begin monitoring the field
+    // to provide feedback in the UI.
     if (state.relatedUrl != null && !isURL(state.relatedUrl!)) {
       emit(
         state.copyWith(
@@ -144,7 +146,8 @@ class EditEntryBloc extends Bloc<EditEntryEvent, EditEntryState> {
       source: state.source,
       relatedUrl: state.relatedUrl,
       frequencyType: state.frequencyType,
-      frequencyInDays: state.frequencyInDays,
+      // toSet() -> .toList() to remove any duplicates
+      frequencyInDays: state.frequencyInDays?.toSet().toList(),
       entryPriority: state.entryPriority,
       activationDate: state.activationDate,
       isActive: state.isActive,
