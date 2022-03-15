@@ -7,18 +7,24 @@ environment:
   sdk: ">=2.14.0 <3.0.0"
 
 dependencies:
+  authentication_repository:
+    path: packages/authentication_packages/authentication_repository
   bloc: ^8.0.2
   entries_api:
     path: packages/entries_packages/entries_api
   entries_repository:
     path: packages/entries_packages/entries_repository
   equatable: ^2.0.3
+  flow_builder: ^0.0.4
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
   flutter_localizations:
     sdk: flutter
   flutter_services_binding: ^0.1.0
+  form_inputs:
+    path: packages/authentication_packages/form_inputs
+  formz: ^0.4.0
   intl: ^0.17.0
   local_storage_entries_api:
     path: packages/entries_packages/local_storage_entries_api
@@ -35,3 +41,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - assets/
