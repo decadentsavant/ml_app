@@ -9,7 +9,7 @@ environment:
 dependencies:
   authentication_repository:
     path: packages/authentication_packages/authentication_repository
-  bloc: ^8.0.2
+  bloc: ^8.0.3
   entries_api:
     path: packages/entries_packages/entries_api
   entries_repository:
@@ -32,7 +32,7 @@ dependencies:
   url_launcher: ^6.0.18
 
 dev_dependencies:
-  bloc_test: ^9.0.2
+  bloc_test: ^9.0.3
   flutter_test:
     sdk: flutter
   mockingjay: ^0.2.0
