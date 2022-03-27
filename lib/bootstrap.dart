@@ -8,7 +8,6 @@ import 'package:entries_repository/entries_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ml_app/app/app.dart';
-import 'package:ml_app/app/app_bloc_observer.dart';
 import 'package:ml_app/firebase_options.dart';
 
 //entriesApi is abstract. LocalStorageEntriesApi is an implementation

@@ -23,6 +23,7 @@ dependencies:
     sdk: flutter
   flutter_services_binding: ^0.1.0
   flutterfire_ui: ^0.3.6
+  font_awesome_flutter: ^10.1.0
   form_inputs:
     path: packages/authentication_packages/form_inputs
   formz: ^0.4.0

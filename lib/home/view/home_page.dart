@@ -6,9 +6,10 @@ import 'package:ml_app/home/home.dart';
 import 'package:ml_app/stats/stats.dart';
 import 'package:ml_app/todays_review/view/todays_review_dart.dart';
 
-
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  static Page page() => const MaterialPage<void>(child: HomePage());
 
   @override
   Widget build(BuildContext context) {
