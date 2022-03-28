@@ -1,10 +1,10 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:entries_repository/entries_repository.dart';
+import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ml_app/app/app.dart';
 import 'package:ml_app/l10n/l10n.dart';
-import 'package:ml_app/login/login.dart';
 import 'package:ml_app/theme/theme.dart';
 
 class App extends StatelessWidget {
@@ -49,7 +49,10 @@ class AppView extends StatelessWidget {
       // darkTheme: FlutterMLTheme.dark,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const LoginPage(),
+      home: FlowBuilder<AppStatus>(
+        state: context.select((AppBloc bloc) => bloc.state.status),
+        onGeneratePages: onGenerateAppViewPages,
+      ),
     );
   }
 }

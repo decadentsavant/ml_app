@@ -2,6 +2,7 @@ import 'package:entries_repository/entries_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ml_app/app/bloc/app_bloc.dart';
 import 'package:ml_app/edit_entry/edit_entry.dart';
 import 'package:ml_app/todays_review/todays_review.dart';
 
@@ -28,6 +29,10 @@ class TodaysReviewPageView extends StatelessWidget {
         DummData(entriesRepository: context.read<EntriesRepository>());
     return Scaffold(
       appBar: AppBar(
+        leading:  IconButton(
+          onPressed: () => context.read<AppBloc>().add(AppLogoutRequested()),
+          icon: const Icon(Icons.logout_outlined),
+        ),
         title: const Text(
           "Today's Review",
         ),

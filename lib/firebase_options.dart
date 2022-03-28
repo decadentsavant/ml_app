@@ -61,6 +61,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '895745841722',
     projectId: 'mlapp-mostlearned',
     storageBucket: 'mlapp-mostlearned.appspot.com',
+    androidClientId: '895745841722-03s0v5ch22ah632fcklseceu11ho36hv.apps.googleusercontent.com',
     iosClientId: '895745841722-ffemt7ec0teloe64e0g77gs1ohm9qkhq.apps.googleusercontent.com',
     iosBundleId: 'com.mostlearned.mlapp',
   );

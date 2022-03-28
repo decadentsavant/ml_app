@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "895745841722",
+    "project_id": "mlapp-mostlearned",
+    "storage_bucket": "mlapp-mostlearned.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895745841722:android:e0c72e64dd9000a1e23303",
+        "android_client_info": {
+          "package_name": "com.mostlearned.mlapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "895745841722-4kbhdt51jh4lvh1h8843h81bu21iqhgs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mostlearned.mlapp",
+            "certificate_hash": "a104b407c489dc91dfb9107a8780613fb467d3e5"
+          }
+        },
+        {
+          "client_id": "895745841722-77so4s19pl2ms36mbsj87lte5ofjuq9a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mostlearned.mlapp",
+            "certificate_hash": "88d316bad116a27a9fcae5de6fe1702e3cfc29ea"
+          }
+        },
+        {
+          "client_id": "895745841722-5rdbj2gnf86akl7oqo24th5hel9ribhj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOwffD9p05dTUz3B4MDmqkzeEc5oomuZ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "895745841722-5rdbj2gnf86akl7oqo24th5hel9ribhj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "895745841722-ffemt7ec0teloe64e0g77gs1ohm9qkhq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mostlearned.mlapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
