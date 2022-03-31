@@ -1,6 +1,6 @@
 part of 'home_cubit.dart';
 
-enum HomeTab { todaysReview, allEntries, stats }
+enum HomeTab { todaysReview, allEntries, stats, profile }
 
 class HomeState extends Equatable {
   const HomeState({

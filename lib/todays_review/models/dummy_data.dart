@@ -22,7 +22,7 @@ class DummData {
     // frequencyType: FrequencyType.periodically,
     frequencyInDays: const [2,4,6,8,10,12,14,16,18,20],
     // entryPriority: EntryPriority.normal,
-    activationDate: DateTime.utc(2022, 2, 10),
+    activationDate: DateTime.utc(2022, 3, 20),
     // isActive: true,
   ),
   Entry(
@@ -33,7 +33,7 @@ class DummData {
     // frequencyType: FrequencyType.periodically,
     frequencyInDays: const [2,4,6,8,10,12,14,16,18,20],
     entryPriority: EntryPriority.high,
-    activationDate: DateTime.utc(2022, 2, 11),
+    activationDate: DateTime.utc(2022, 3, 21),
     // isActive: true,
   ),
   Entry(
@@ -44,7 +44,7 @@ class DummData {
     // frequencyType: FrequencyType.periodically,
     frequencyInDays: const [1,3,5,7,9,11,13,15,17,19,21],
     // entryPriority: EntryPriority.normal,
-    activationDate: DateTime.utc(2022, 2, 10),
+    activationDate: DateTime.utc(2022, 3, 20),
     // isActive: true,
   ),
   Entry(
@@ -55,7 +55,7 @@ class DummData {
     // frequencyType: FrequencyType.periodically,
     frequencyInDays: const [1,3,5,7,9,11,13,15,17,19,21],
     entryPriority: EntryPriority.high,
-    activationDate: DateTime.utc(2022, 2, 11),
+    activationDate: DateTime.utc(2022, 3, 21),
     // isActive: true,
   ),
   Entry(
@@ -66,7 +66,7 @@ class DummData {
     // frequencyType: FrequencyType.periodically,
     frequencyInDays: const [1,3,5,7,9,11,13,15,17,19,21],
     entryPriority: EntryPriority.highest,
-    activationDate: DateTime.utc(2022, 2, 3),
+    activationDate: DateTime.utc(2022, 3, 3),
     // isActive: true,
   ),
   Entry(
@@ -77,7 +77,7 @@ class DummData {
     // frequencyType: FrequencyType.periodically,
     frequencyInDays: const [3,6,9,12,15,18,21,24],
     // entryPriority: EntryPriority.normal,
-    activationDate: DateTime.utc(2022, 2, 7),
+    activationDate: DateTime.utc(2022, 3, 7),
     // isActive: true,
   ),
   Entry(

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ml_app/all_entries/all_entries.dart';
 import 'package:ml_app/edit_entry/edit_entry.dart';
 import 'package:ml_app/home/home.dart';
+import 'package:ml_app/profile/profile.dart';
 import 'package:ml_app/stats/stats.dart';
 import 'package:ml_app/todays_review/view/todays_review_dart.dart';
 
@@ -30,7 +31,12 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       body: IndexedStack(
         index: selectedTab.index,
-        children: const [TodaysReviewPage(), AllEntriesPage(), StatsPage()],
+        children: const [
+          TodaysReviewPage(),
+          AllEntriesPage(),
+          StatsPage(),
+          ProfilePage(),
+        ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
@@ -41,7 +47,7 @@ class HomeView extends StatelessWidget {
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _HomeTabButton(
               groupValue: selectedTab,
@@ -57,6 +63,11 @@ class HomeView extends StatelessWidget {
               groupValue: selectedTab,
               value: HomeTab.stats,
               icon: const Icon(Icons.show_chart_rounded),
+            ),
+            _HomeTabButton(
+              groupValue: selectedTab,
+              value: HomeTab.profile,
+              icon: const Icon(Icons.settings_rounded),
             ),
           ],
         ),
