@@ -24,14 +24,10 @@ class AllEntriesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('All Entries'),
-        actions: const [
-          AllEntriesFilterButton(),
-          // AllEntriesOptionsButton(),
-        ],
+        actions: const [],
       ),
       body: MultiBlocListener(
         listeners: [
@@ -61,7 +57,9 @@ class AllEntriesView extends StatelessWidget {
                 ..hideCurrentSnackBar()
                 ..showSnackBar(
                   SnackBar(
-                    content: Text('${deletedEntry.title} entry deleted',),
+                    content: Text(
+                      '${deletedEntry.title} entry deleted',
+                    ),
                     action: SnackBarAction(
                       label: 'Undo Deletion',
                       onPressed: () {
@@ -86,7 +84,7 @@ class AllEntriesView extends StatelessWidget {
               } else {
                 return Center(
                   child: Text(
-                    'You have no entries. Make some!',
+                    'You have no entries. Make some! Prettify this page.',
                     // TODO(Corey): Likely a message for new people.
                     // Link to a video on your website
                     style: Theme.of(context).textTheme.caption,
@@ -98,7 +96,8 @@ class AllEntriesView extends StatelessWidget {
             return CupertinoScrollbar(
               child: ListView(
                 children: [
-                  for (final entry in state.filteredEntries)
+                  const AllEntriesSearch(),
+                  for (final entry in state.queriedEntries)
                     AllEntriesListTile(
                       entry: entry,
                       onToggleIsActive: (isIsActive) {
@@ -116,8 +115,8 @@ class AllEntriesView extends StatelessWidget {
                       },
                       onTap: () {
                         Navigator.of(context).push(
-                         EditEntryPage.route(initialEntry: entry),
-                         );
+                          EditEntryPage.route(initialEntry: entry),
+                        );
                       },
                     ),
                 ],

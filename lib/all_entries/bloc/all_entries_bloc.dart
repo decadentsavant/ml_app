@@ -12,12 +12,10 @@ class AllEntriesBloc extends Bloc<AllEntriesEvent, AllEntriesState> {
   })  : _entriesRepository = entriesRepository,
         super(const AllEntriesState()) {
     on<AllEntriesSubscriptionRequested>(_onSubscriptionRequested);
+    on<AllEntriesQueryChanged>(_onQueryChanged);
     on<AllEntriesIsActiveToggled>(_onIsActiveToggled);
     on<AllEntriesEntryDeleted>(_onEntryDeleted);
     on<AllEntriesUndoDeletionRequested>(_onUndoDeletionRequested);
-    on<AllEntriesFilterChanged>(_onFilterChanged);
-    on<AllEntriesToggleAllRequested>(_onToggleAllRequested);
-    on<AllEntriesClearCompletedRequested>(_onClearCompletedRequested);
   }
 
   final EntriesRepository _entriesRepository;
@@ -38,6 +36,14 @@ class AllEntriesBloc extends Bloc<AllEntriesEvent, AllEntriesState> {
         status: () => AllEntriesStatus.failure,
       ),
     );
+  }
+
+  void _onQueryChanged(
+    AllEntriesQueryChanged event,
+    Emitter<AllEntriesState> emit,
+  ) {
+    emit(state.copyWith(query: event.query));
+    
   }
 
   Future<void> _onIsActiveToggled(
@@ -68,28 +74,5 @@ class AllEntriesBloc extends Bloc<AllEntriesEvent, AllEntriesState> {
     final entry = state.lastDeletedEntry!;
     emit(state.copyWith(lastDeletedEntry: () => null));
     await _entriesRepository.saveEntry(entry);
-  }
-
-  void _onFilterChanged(
-    AllEntriesFilterChanged event,
-    Emitter<AllEntriesState> emit,
-  ) {
-    emit(state.copyWith(filter: () => event.filter));
-  }
-
-  Future<void> _onToggleAllRequested(
-    AllEntriesToggleAllRequested event,
-    Emitter<AllEntriesState> emit,
-  ) async {
-    // ignore: unused_local_variable
-    final areAllCompleted = state.entries.every((entry) => entry.isActive);
-    // await _entriesRepository.completeAll(isActive: !areAllCompleted);
-  }
-
-  Future<void> _onClearCompletedRequested(
-    AllEntriesClearCompletedRequested event,
-    Emitter<AllEntriesState> emit,
-  ) async {
-    // await _entriesRepository.clearCompleted();
   }
 }

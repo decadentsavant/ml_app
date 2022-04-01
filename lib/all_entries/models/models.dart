@@ -1,1 +1,1 @@
-export 'all_entries_view_filter.dart';
+export 'all_entries_query_filter.dart';

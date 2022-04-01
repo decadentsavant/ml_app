@@ -11,6 +11,15 @@ class AllEntriesSubscriptionRequested extends AllEntriesEvent {
   const AllEntriesSubscriptionRequested();
 }
 
+class AllEntriesQueryChanged extends AllEntriesEvent {
+  const AllEntriesQueryChanged (this.query);
+
+  final String query;
+
+  @override
+  List<Object> get props => [query];
+}
+
 class AllEntriesIsActiveToggled extends AllEntriesEvent {
   const AllEntriesIsActiveToggled({
     required this.entry,
@@ -35,21 +44,4 @@ class AllEntriesEntryDeleted extends AllEntriesEvent {
 
 class AllEntriesUndoDeletionRequested extends AllEntriesEvent {
   const AllEntriesUndoDeletionRequested();
-}
-
-class AllEntriesFilterChanged extends AllEntriesEvent {
-  const AllEntriesFilterChanged(this.filter);
-
-  final AllEntriesViewFilter filter;
-
-  @override
-  List<Object> get props => [filter];
-}
-
-class AllEntriesToggleAllRequested extends AllEntriesEvent {
-  const AllEntriesToggleAllRequested();
-}
-
-class AllEntriesClearCompletedRequested extends AllEntriesEvent {
-  const AllEntriesClearCompletedRequested();
 }

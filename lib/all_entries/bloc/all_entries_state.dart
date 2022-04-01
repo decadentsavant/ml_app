@@ -2,31 +2,37 @@ part of 'all_entries_bloc.dart';
 
 enum AllEntriesStatus { initial, loading, success, failure }
 
+extension AllEntriesStatusX on AllEntriesStatus {
+  bool get isSuccess => [AllEntriesStatus.success].contains(this);
+}
+
 class AllEntriesState extends Equatable {
   const AllEntriesState({
     this.status = AllEntriesStatus.initial,
     this.entries = const [],
-    this.filter = AllEntriesViewFilter.all,
+    this.query = '',
     this.lastDeletedEntry,
   });
 
   final AllEntriesStatus status;
   final List<Entry> entries;
-  final AllEntriesViewFilter filter;
+  final String query;
   final Entry? lastDeletedEntry;
 
-  Iterable<Entry> get filteredEntries => filter.applyAll(entries);
+  Iterable<Entry> get queriedEntries => queryResults(entries, query);
+
+  
 
   AllEntriesState copyWith({
     AllEntriesStatus Function()? status,
     List<Entry> Function()? entries,
-    AllEntriesViewFilter Function()? filter,
+    String? query,
     Entry? Function()? lastDeletedEntry,
   }) {
     return AllEntriesState(
       status: status != null ? status() : this.status,
       entries: entries != null ? entries() : this.entries,
-      filter: filter != null ? filter() : this.filter,
+      query: query ?? this.query,
       lastDeletedEntry:
           lastDeletedEntry != null ? lastDeletedEntry() : this.lastDeletedEntry,
     );
@@ -36,7 +42,7 @@ class AllEntriesState extends Equatable {
   List<Object?> get props => [
         status,
         entries,
-        filter,
+        query,
         lastDeletedEntry,
       ];
 }
