@@ -194,9 +194,11 @@ class _RelatedUrlField extends StatelessWidget {
       key: const Key('editEntryView_relatedUrl_textFormField'),
       initialValue: state.relatedUrl,
       decoration: InputDecoration(
-        errorText: (needsMonitoring && !isValidURL(state.relatedUrl!))
-            ? 'URL is not valid'
-            : null,
+        errorText: (!needsMonitoring || state.relatedUrl == null)
+            ? null
+            : !isValidURL(state.relatedUrl!)
+                ? 'URL is not valid'
+                : null,
         enabled: !state.status.isLoadingOrSuccess,
         labelText: 'RelatedUrl',
         hintText: 'To refresh later...',
