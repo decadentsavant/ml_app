@@ -21,7 +21,7 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile Page'),
+      title: const Text('Profile Page'),
       ),
       body: const Center(
         child: Text('Profile Page'),
