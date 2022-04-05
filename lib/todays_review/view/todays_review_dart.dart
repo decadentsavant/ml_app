@@ -29,7 +29,7 @@ class TodaysReviewPageView extends StatelessWidget {
         DummData(entriesRepository: context.read<EntriesRepository>());
     return Scaffold(
       appBar: AppBar(
-        leading:  IconButton(
+        leading: IconButton(
           onPressed: () => context.read<AppBloc>().add(AppLogoutRequested()),
           icon: const Icon(Icons.logout_outlined),
         ),
