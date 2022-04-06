@@ -12,7 +12,7 @@ class EntriesRepository {
 
   final EntriesApi _entriesApi;
 
-  ///Provieds a [Stream} of all entries.
+  ///Provides a [Stream} of all entries.
   Stream<List<Entry>> getEntries() => _entriesApi.getEntries();
 
   ///Save an [entry]
