@@ -10,12 +10,13 @@ import 'package:ml_app/theme/theme.dart';
 class App extends StatelessWidget {
   const App({
     Key? key,
-    required this.entriesRepository,
+    required EntriesRepository entriesRepository,
     required AuthenticationRepository authenticationRepository,
-  }) : _authenticationRepository = authenticationRepository,
-  super(key: key);
+  })  : _authenticationRepository = authenticationRepository,
+        _entriesRepository = entriesRepository,
+        super(key: key);
 
-  final EntriesRepository entriesRepository;
+  final EntriesRepository _entriesRepository;
   final AuthenticationRepository _authenticationRepository;
 
   @override
@@ -23,7 +24,7 @@ class App extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<EntriesRepository>(
-          create: (context) => entriesRepository,
+          create: (context) => _entriesRepository,
         ),
         RepositoryProvider<AuthenticationRepository>(
           create: (context) => _authenticationRepository,
