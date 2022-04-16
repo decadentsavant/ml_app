@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: implicit_dynamic_parameter, cast_nullable_to_non_nullable,
-// ignore_for_file: require_trailing_commas
+// ignore_for_file: implicit_dynamic_parameter, require_trailing_commas,
+// ignore_for_file: cast_nullable_to_non_nullable
 
 part of 'entry.dart';
 

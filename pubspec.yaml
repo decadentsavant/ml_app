@@ -10,11 +10,15 @@ dependencies:
   authentication_repository:
     path: packages/authentication_packages/authentication_repository
   bloc: ^8.0.3
+  cloud_firestore: ^3.1.11
   entries_api:
     path: packages/entries_packages/entries_api
   entries_repository:
     path: packages/entries_packages/entries_repository
   equatable: ^2.0.3
+  firebase_core: ^1.14.1
+  firebase_entries_api:
+    path: packages/entries_packages/firebase_entries_api
   flow_builder: ^0.0.4
   flutter:
     sdk: flutter
@@ -22,14 +26,11 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_services_binding: ^0.1.0
-  flutterfire_ui: ^0.3.6
   font_awesome_flutter: ^10.1.0
   form_inputs:
     path: packages/authentication_packages/form_inputs
   formz: ^0.4.0
   intl: ^0.17.0
-  local_storage_entries_api:
-    path: packages/entries_packages/local_storage_entries_api
   url_launcher: ^6.0.18
 
 dev_dependencies:

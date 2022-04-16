@@ -5,10 +5,8 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:entries_api/entries_api.dart';
 import 'package:entries_repository/entries_repository.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ml_app/app/app.dart';
-import 'package:ml_app/firebase_options.dart';
 
 //entriesApi is abstract. LocalStorageEntriesApi is an implementation
 //of an entriesApi instance and is valid
@@ -25,10 +23,6 @@ void bootstrap({required EntriesApi entriesApi}) {
     () async {
       await BlocOverrides.runZoned(
         () async {
-          WidgetsFlutterBinding.ensureInitialized();
-          await Firebase.initializeApp(
-            options: DefaultFirebaseOptions.currentPlatform,
-          );
           final authenticationRepository = AuthenticationRepository();
           await authenticationRepository.user.first;
           runApp(

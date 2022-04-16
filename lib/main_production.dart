@@ -1,14 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_entries_api/firebase_entries_api.dart';
 import 'package:flutter_services_binding/flutter_services_binding.dart';
-import 'package:local_storage_entries_api/local_storage_entries_api.dart';
 import 'package:ml_app/bootstrap.dart';
+import 'package:ml_app/firebase_options.dart';
 
 Future<void> main() async {
   FlutterServicesBinding.ensureInitialized();
-
-// LocalStorageEntriesApi extend EntriesApi
-  final entriesApi = LocalStorageEntriesApi(
-    plugin: await SharedPreferences.getInstance(),
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
   );
+  final test = FirebaseFirestore.instance;
 
-  bootstrap(entriesApi: entriesApi);
+  bootstrap(entriesApi: FirebaseEntriesApi(test));
 }
