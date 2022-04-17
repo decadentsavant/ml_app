@@ -35,7 +35,7 @@ class AllEntriesListTile extends StatelessWidget {
       child: ListTile(
         onTap: onTap,
         tileColor: entry.isActive ? null : Colors.red[300],
-        title: entry.source == null
+        title: (entry.source == null || entry.source == '')
             ? Text(
                 entry.title,
                 maxLines: 1,
