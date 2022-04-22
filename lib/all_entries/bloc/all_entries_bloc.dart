@@ -46,26 +46,26 @@ class AllEntriesBloc extends Bloc<AllEntriesEvent, AllEntriesState> {
     
   }
 
-  Future<void> _onIsActiveToggled(
+  void _onIsActiveToggled(
     AllEntriesIsActiveToggled event,
     Emitter<AllEntriesState> emit,
-  ) async {
+  ) {
     final newEntry = event.entry.copyWith(isActive: event.isActive);
-    await _entriesRepository.saveEntry(newEntry);
+    _entriesRepository.saveEntry(newEntry);
   }
 
-  Future<void> _onEntryDeleted(
+  void _onEntryDeleted(
     AllEntriesEntryDeleted event,
     Emitter<AllEntriesState> emit,
-  ) async {
+  ) {
+    _entriesRepository.deleteEntry(event.entry.id);
     emit(state.copyWith(lastDeletedEntry: () => event.entry));
-    await _entriesRepository.deleteEntry(event.entry.id);
   }
 
-  Future<void> _onUndoDeletionRequested(
+  void _onUndoDeletionRequested(
     AllEntriesUndoDeletionRequested event,
     Emitter<AllEntriesState> emit,
-  ) async {
+  ) {
     assert(
       state.lastDeletedEntry != null,
       'Last deleted entry can not be null.',
@@ -73,6 +73,6 @@ class AllEntriesBloc extends Bloc<AllEntriesEvent, AllEntriesState> {
 
     final entry = state.lastDeletedEntry!;
     emit(state.copyWith(lastDeletedEntry: () => null));
-    await _entriesRepository.saveEntry(entry);
+    _entriesRepository.saveEntry(entry);
   }
 }

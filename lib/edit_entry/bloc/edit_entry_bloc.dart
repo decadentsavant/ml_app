@@ -117,10 +117,10 @@ class EditEntryBloc extends Bloc<EditEntryEvent, EditEntryState> {
     emit(state.copyWith(activationDate: event.activationDate));
   }
 
-  Future<void> _onSubmitted(
+  void _onSubmitted(
     EditEntrySubmitted event,
     Emitter<EditEntryState> emit,
-  ) async {
+  ) {
     emit(state.copyWith(status: EditEntryStatus.loading));
 
     // If one of the checks fails, start monitorig and give UI feedback
@@ -159,7 +159,7 @@ class EditEntryBloc extends Bloc<EditEntryEvent, EditEntryState> {
     );
 
     try {
-      await _entriesRepository.saveEntry(entry);
+      _entriesRepository.saveEntry(entry);
       emit(state.copyWith(status: EditEntryStatus.success));
     } catch (e) {
       emit(state.copyWith(status: EditEntryStatus.failure));

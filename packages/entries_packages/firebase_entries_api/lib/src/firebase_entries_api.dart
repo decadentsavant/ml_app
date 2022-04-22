@@ -37,7 +37,6 @@ class FirebaseEntriesApi extends EntriesApi {
   /// Return streamed list of [Entry] from Firestore.
   @override
   Stream<List<Entry>> getEntries() {
-    print('this was called');
     return _entryStreamController;
   }
 
