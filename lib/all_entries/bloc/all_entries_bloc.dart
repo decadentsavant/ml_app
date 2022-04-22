@@ -32,9 +32,9 @@ class AllEntriesBloc extends Bloc<AllEntriesEvent, AllEntriesState> {
         status: () => AllEntriesStatus.success,
         entries: () => entries,
       ),
-      onError: (_, __) => state.copyWith(
-        status: () => AllEntriesStatus.failure,
-      ),
+      onError: (_, __) {
+       return state.copyWith(status: () => AllEntriesStatus.failure);
+      },
     );
   }
 

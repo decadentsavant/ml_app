@@ -40,7 +40,7 @@ class AllEntriesView extends StatelessWidget {
                   ..hideCurrentSnackBar()
                   ..showSnackBar(
                     const SnackBar(
-                      content: Text('Error on BlocListener'),
+                      content: Text('Error on BlocListener[allEntriesView]'),
                     ),
                   );
               }

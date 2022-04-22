@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:entries_api/entries_api.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -151,29 +150,6 @@ class Entry extends Equatable {
 
   /// Deserializes the given [JsonMap] into a [Entry].
   static Entry fromJson(JsonMap json) => _$EntryFromJson(json);
-
-  /// Deserializes the given [DocumentSnapshot] into a [Entry].
-  static Entry fromSnapshot(DocumentSnapshot snap) {
-    final entry = Entry(
-      id: snap['id'].toString(),
-      title: snap['title'].toString(),
-      notes: snap['notes'].toString(),
-      source: snap['source'].toString(),
-      relatedUrl: snap['relatedUrl'].toString(),
-      );
-    return entry;
-  }
-
-  /// Serializes the given [Entry] into a Firestore document.
-  Map<String, Object> toDocument() {
-    return {
-      'id': id,
-      'title': title,
-      'notes': notes,
-      'source': source ?? '',
-      'relatedUrl': relatedUrl ?? '',
-    };
-  }
 
   /// Converts this [Entry] into a [JsonMap].
   JsonMap toJson() => _$EntryToJson(this);

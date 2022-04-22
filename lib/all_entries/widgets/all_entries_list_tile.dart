@@ -20,7 +20,7 @@ class AllEntriesListTile extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Dismissible(
-      key: Key('allEntriesListTile_dismissible_${entry.id}'),
+      key: UniqueKey(),
       onDismissed: onDismissed,
       direction: DismissDirection.endToStart,
       background: Container(
