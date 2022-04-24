@@ -26,7 +26,7 @@ class FirebaseEntriesApi extends EntriesApi {
   /// Transforms a [CollectionReference] to manipulate a custom object instead
   /// of a `Map<String, dynamic>`. This makes both read and write operations
   /// type-safe.
-  final modelsRef =
+  final _modelsRef =
       FirebaseFirestore.instance.collection('entries').withConverter<Entry>(
             fromFirestore: (snapshot, _) => Entry.fromJson(snapshot.data()!),
             toFirestore: (entry, _) => entry.toJson(),
@@ -43,7 +43,7 @@ class FirebaseEntriesApi extends EntriesApi {
   /// Save a single [Entry] to Firestore.
   @override
   Future<void> saveEntry(Entry entry) {
-    return modelsRef.doc(entry.id).set(entry);
+    return _modelsRef.doc(entry.id).set(entry);
   }
 
   /// Delete a single [Entry] from Firestore.
