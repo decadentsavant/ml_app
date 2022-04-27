@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: implicit_dynamic_parameter, require_trailing_commas,
-// ignore_for_file: cast_nullable_to_non_nullable
+// ignore_for_file: implicit_dynamic_parameter, cast_nullable_to_non_nullable
+// ignore_for_file: require_trailing_commas
 
 part of 'entry.dart';
 
@@ -37,6 +37,13 @@ Entry _$EntryFromJson(Map<String, dynamic> json) => $checkedCreate(
           activationDate: $checkedConvert('activation_date',
               (v) => v == null ? null : DateTime.parse(v as String)),
           isActive: $checkedConvert('is_active', (v) => v as bool? ?? true),
+          learningStamps: $checkedConvert(
+              'learning_stamps',
+              (v) =>
+                  (v as Map<String, dynamic>?)?.map(
+                    (k, e) => MapEntry(DateTime.parse(k), e as int),
+                  ) ??
+                  const {}),
         );
         return val;
       },
@@ -46,7 +53,8 @@ Entry _$EntryFromJson(Map<String, dynamic> json) => $checkedCreate(
         'frequencyInDays': 'frequency_in_days',
         'entryPriority': 'entry_priority',
         'activationDate': 'activation_date',
-        'isActive': 'is_active'
+        'isActive': 'is_active',
+        'learningStamps': 'learning_stamps'
       },
     );
 
@@ -61,6 +69,8 @@ Map<String, dynamic> _$EntryToJson(Entry instance) => <String, dynamic>{
       'entry_priority': _$EntryPriorityEnumMap[instance.entryPriority],
       'activation_date': instance.activationDate.toIso8601String(),
       'is_active': instance.isActive,
+      'learning_stamps': instance.learningStamps
+          .map((k, e) => MapEntry(k.toIso8601String(), e)),
     };
 
 K _$enumDecode<K, V>(

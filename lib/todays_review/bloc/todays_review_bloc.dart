@@ -13,9 +13,11 @@ class TodaysReviewBloc extends Bloc<TodaysReviewEvent, TodaysReviewState> {
   TodaysReviewBloc({
     required EntriesRepository entriesRepository,
   })  : _entriesRepository = entriesRepository,
-        super(const TodaysReviewState()) {
+        super(TodaysReviewState()) {
     on<TodaysReviewSubscriptionRequested>(_onSubscriptionRequested);
     on<TodaysReviewUrlLaunchRequested>(_onUrlLaunchRequested);
+    on<TodaysReviewFocusedLearningStart>(_onFocusedLearningStart);
+    // on<TodaysReviewFocusedLearningEnd>(_onFocusedLearningEnd);
   }
 
   final EntriesRepository _entriesRepository;
@@ -68,5 +70,16 @@ class TodaysReviewBloc extends Bloc<TodaysReviewEvent, TodaysReviewState> {
     }
 
     emit(state.copyWith(status: () => TodaysReviewStatus.success));
+  }
+
+  void _onFocusedLearningStart(
+    TodaysReviewFocusedLearningStart event,
+    Emitter<TodaysReviewState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        learningStart: DateTime.now().toUtc(),
+      ),
+    );
   }
 }

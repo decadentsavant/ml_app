@@ -54,7 +54,8 @@ class Entry extends Equatable {
     this.entryPriority = EntryPriority.normal,
     DateTime? activationDate,
     this.isActive = true,
-  }) : assert(
+    this.learningStamps = const {},
+  })  : assert(
           id == null || id.isNotEmpty,
           'id can not be null and should not be empty',
         ),
@@ -110,21 +111,28 @@ class Entry extends Equatable {
   /// in the future.
   final bool isActive;
 
+  /// The entry's records of focused learning time.
+  ///
+  /// [Map] consisting of [DateTime] timestamps and [int] lengths of
+  /// focused learning time.
+  final Map<DateTime, int> learningStamps;
+
   /// Returns a copy of this entry with the given values updated.
   ///
   /// {@macro entry}
-  Entry copyWith({
-    String? id,
-    String? title,
-    String? notes,
-    String? source,
-    String? relatedUrl,
-    FrequencyType? frequencyType,
-    List<int>? frequencyInDays,
-    EntryPriority? entryPriority,
-    DateTime? activationDate,
-    bool? isActive,
-  }) {
+  Entry copyWith(
+      {String? id,
+      String? title,
+      String? notes,
+      String? source,
+      String? relatedUrl,
+      FrequencyType? frequencyType,
+      List<int>? frequencyInDays,
+      EntryPriority? entryPriority,
+      DateTime? activationDate,
+      bool? isActive,
+      Map<DateTime, int>? learningStamps,
+      }) {
     assert(
       !(frequencyType == FrequencyType.daily && frequencyInDays!.length != 1),
       'frequencyInDays must have a length of 1 for dailies',
@@ -145,6 +153,7 @@ class Entry extends Equatable {
       entryPriority: entryPriority ?? this.entryPriority,
       activationDate: activationDate ?? this.activationDate,
       isActive: isActive ?? this.isActive,
+      learningStamps: learningStamps ?? this.learningStamps,
     );
   }
 
@@ -166,5 +175,6 @@ class Entry extends Equatable {
         entryPriority,
         activationDate,
         isActive,
+        learningStamps
       ];
 }

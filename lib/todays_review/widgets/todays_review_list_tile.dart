@@ -29,9 +29,12 @@ class TodaysReviewListTile extends StatelessWidget {
       child: GestureDetector(
         onLongPressStart: (_) {
           _overlayState?.insert(_overlayEntry);
+          // context
+          //     .read<TodaysReviewBloc>()
+          //     .add(TodaysReviewFocusedLearningStart(entry));
         },
         onLongPressEnd: (_) {
-          _overlayEntry.remove();
+            _overlayEntry.remove();
         },
         child: Card(
           elevation: 4,
@@ -68,10 +71,13 @@ class TodaysReviewListTile extends StatelessWidget {
 }
 
 class FocusAndIsolate extends OverlayEntry {
-  FocusAndIsolate(String title, String notes,)
-      : super(
-          // maintainState: true,
+  FocusAndIsolate(
+    String title,
+    String notes,
+  ) : super(
+          maintainState: true,
           builder: (context) {
+            final mediaQuery = MediaQuery.of(context);
             return Stack(
               children: [
                 Opacity(
@@ -81,10 +87,10 @@ class FocusAndIsolate extends OverlayEntry {
                   ),
                 ),
                 Positioned(
-                  top: MediaQuery.of(context).size.height * .1,
-                  height: MediaQuery.of(context).size.height * .8,
-                  left: MediaQuery.of(context).size.width * .1,
-                  width: MediaQuery.of(context).size.width * .8,
+                  top: mediaQuery.size.height * .1,
+                  height: mediaQuery.size.height * .8,
+                  left: mediaQuery.size.width * .1,
+                  width: mediaQuery.size.width * .8,
                   child: BackdropFilter(
                     filter: ui.ImageFilter.blur(
                       sigmaX: 2,
@@ -98,7 +104,9 @@ class FocusAndIsolate extends OverlayEntry {
                           child: Column(
                             children: [
                               Text(title),
-                              const SizedBox(height: 12,),
+                              const SizedBox(
+                                height: 12,
+                              ),
                               Text(notes),
                             ],
                           ),

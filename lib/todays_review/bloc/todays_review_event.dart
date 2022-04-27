@@ -18,3 +18,21 @@ class TodaysReviewUrlLaunchRequested extends TodaysReviewEvent {
   @override 
   List<Object> get props => [url];
 }
+
+class TodaysReviewFocusedLearningStart extends TodaysReviewEvent {
+  const TodaysReviewFocusedLearningStart(this.entry);
+
+  final Entry entry;
+
+  @override
+  List<Object> get props => [entry];
+}
+
+class TodaysReviewFocusedLearningEnd extends TodaysReviewEvent {
+  const TodaysReviewFocusedLearningEnd(this.entry);
+
+  final Entry entry;
+
+  @override
+  List<Object> get props => [entry];
+}
