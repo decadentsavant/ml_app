@@ -2,6 +2,7 @@ import 'package:entries_repository/entries_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ml_app/all_entries/widgets/widgets.dart';
 import 'package:ml_app/app/bloc/app_bloc.dart';
 import 'package:ml_app/edit_entry/edit_entry.dart';
 import 'package:ml_app/todays_review/todays_review.dart';
@@ -27,6 +28,8 @@ class TodaysReviewPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     final dummy =
         DummData(entriesRepository: context.read<EntriesRepository>());
+    late OverlayEntry _popupDialog;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -72,6 +75,19 @@ class TodaysReviewPageView extends StatelessWidget {
                         EditEntryPage.route(initialEntry: entry),
                       );
                     },
+                    onLongPressStart: (_) {
+                      _popupDialog = _createPopupDialog(entry);
+                      Overlay.of(context)!.insert(_popupDialog);
+                      context
+                          .read<TodaysReviewBloc>()
+                          .add(const TodaysReviewFocusedLearningStart());
+                    },
+                    onLongPressEnd: (_) {
+                      _popupDialog.remove();
+                      context
+                          .read<TodaysReviewBloc>()
+                          .add(TodaysReviewFocusedLearningEnd(entry));
+                    },
                   ),
               ],
             ),
@@ -80,4 +96,11 @@ class TodaysReviewPageView extends StatelessWidget {
       ),
     );
   }
+
+  OverlayEntry _createPopupDialog(Entry entry) {
+    return OverlayEntry(
+      builder: (context) => FocusAndIsolate(entry),
+      );
+  }
+
 }

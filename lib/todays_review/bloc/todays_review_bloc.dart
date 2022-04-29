@@ -13,13 +13,12 @@ class TodaysReviewBloc extends Bloc<TodaysReviewEvent, TodaysReviewState> {
   TodaysReviewBloc({
     required EntriesRepository entriesRepository,
   })  : _entriesRepository = entriesRepository,
-        super(TodaysReviewState()) {
+        super(const TodaysReviewState()) {
     on<TodaysReviewSubscriptionRequested>(_onSubscriptionRequested);
     on<TodaysReviewUrlLaunchRequested>(_onUrlLaunchRequested);
     on<TodaysReviewFocusedLearningStart>(_onFocusedLearningStart);
-    // on<TodaysReviewFocusedLearningEnd>(_onFocusedLearningEnd);
+    on<TodaysReviewFocusedLearningEnd>(_onFocusedLearningEnd);
   }
-
   final EntriesRepository _entriesRepository;
 
   Future<void> _onSubscriptionRequested(
@@ -81,5 +80,28 @@ class TodaysReviewBloc extends Bloc<TodaysReviewEvent, TodaysReviewState> {
         learningStart: DateTime.now().toUtc(),
       ),
     );
+    print(state.learningStart);
+    print(state.learningEnd);
+    print(state.differentialDate);
+  }
+
+  void _onFocusedLearningEnd(
+    TodaysReviewFocusedLearningEnd event,
+    Emitter<TodaysReviewState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        learningEnd: DateTime.now().toUtc(),
+      ),
+    );
+    
+    final _learningStamps = event.entry.learningStamps;
+    
+    _learningStamps.addAll({state.learningStart! : state.differentialDate!});
+    
+    final _modifiedEntry =
+        event.entry.copyWith(learningStamps: _learningStamps);
+
+    _entriesRepository.saveEntry(_modifiedEntry);
   }
 }

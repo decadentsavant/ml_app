@@ -20,12 +20,10 @@ class TodaysReviewUrlLaunchRequested extends TodaysReviewEvent {
 }
 
 class TodaysReviewFocusedLearningStart extends TodaysReviewEvent {
-  const TodaysReviewFocusedLearningStart(this.entry);
-
-  final Entry entry;
+  const TodaysReviewFocusedLearningStart();
 
   @override
-  List<Object> get props => [entry];
+  List<Object> get props => [];
 }
 
 class TodaysReviewFocusedLearningEnd extends TodaysReviewEvent {

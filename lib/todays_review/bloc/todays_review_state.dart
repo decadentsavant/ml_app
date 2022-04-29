@@ -3,22 +3,23 @@ part of 'todays_review_bloc.dart';
 enum TodaysReviewStatus { initial, loading, success, failure }
 
 class TodaysReviewState extends Equatable {
-  TodaysReviewState({
+  const TodaysReviewState({
     this.status = TodaysReviewStatus.initial,
     this.entries = const [],
-    DateTime? learningStart,
-    DateTime? learningEnd,
+    this.learningStart,
+    this.learningEnd,
   });
 
   final TodaysReviewStatus status;
   final List<Entry> entries;
-  final DateTime learningStart = DateTime.now();
-  final DateTime learningEnd = DateTime.now();
+  final DateTime? learningStart;
+  final DateTime? learningEnd;
 
   Iterable<Entry> get filteredEntries =>
       createTodaysReviewList(entries: entries);
 
-  int get differentialDate => learningEnd.difference(learningStart).inSeconds;
+  int? get differentialDate =>
+      learningEnd?.difference(learningStart!).inSeconds;
 
   TodaysReviewState copyWith({
     TodaysReviewStatus Function()? status,
