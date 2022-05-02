@@ -4,9 +4,11 @@ import 'package:entries_repository/entries_repository.dart';
 import 'package:flutter/material.dart';
 
 class FocusAndIsolate extends StatelessWidget {
-  FocusAndIsolate(Entry entry, {Key? key}) : _entry = entry, super(key: key);
+  const FocusAndIsolate(Entry entry, {Key? key})
+      : _entry = entry,
+        super(key: key);
 
-  Entry _entry;
+  final Entry _entry;
   @override
   Widget build(BuildContext context) {
     return Stack(

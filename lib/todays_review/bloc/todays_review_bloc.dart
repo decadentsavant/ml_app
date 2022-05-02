@@ -80,9 +80,6 @@ class TodaysReviewBloc extends Bloc<TodaysReviewEvent, TodaysReviewState> {
         learningStart: DateTime.now().toUtc(),
       ),
     );
-    print(state.learningStart);
-    print(state.learningEnd);
-    print(state.differentialDate);
   }
 
   void _onFocusedLearningEnd(
@@ -97,6 +94,7 @@ class TodaysReviewBloc extends Bloc<TodaysReviewEvent, TodaysReviewState> {
     
     final _learningStamps = event.entry.learningStamps;
     
+    // ignore: cascade_invocations
     _learningStamps.addAll({state.learningStart! : state.differentialDate!});
     
     final _modifiedEntry =

@@ -8,12 +8,41 @@ class StatsState extends Equatable {
     this.allEntries = 0,
     this.activeEntries = 0,
     this.archivedEntries = 0,
+    this.totalFocusTimeInSeconds = 0,
+    this.didMakeEntryLastSevenDays = const {},
+    this.focusedSecondsLastSevenDays = const {},
   });
 
   final StatsStatus status;
   final int allEntries;
   final int activeEntries;
   final int archivedEntries;
+  final int totalFocusTimeInSeconds;
+  final Map<int, bool> didMakeEntryLastSevenDays;
+  final Map<int, int> focusedSecondsLastSevenDays;
+
+  StatsState copyWith({
+    StatsStatus? status,
+    int? allEntries,
+    int? activeEntries,
+    int? archivedEntries,
+    int? totalFocusTimeInSeconds,
+    Map<int, bool>? didMakeEntryLastSevenDays,
+    Map<int, int>? focusedSecondsLastSevenDays,
+  }) {
+    return StatsState(
+      status: status ?? this.status,
+      allEntries: allEntries ?? this.allEntries,
+      activeEntries: activeEntries ?? this.activeEntries,
+      archivedEntries: archivedEntries ?? this.archivedEntries,
+      totalFocusTimeInSeconds:
+          totalFocusTimeInSeconds ?? this.totalFocusTimeInSeconds,
+      didMakeEntryLastSevenDays:
+          didMakeEntryLastSevenDays ?? this.didMakeEntryLastSevenDays,
+      focusedSecondsLastSevenDays:
+          focusedSecondsLastSevenDays ?? this.focusedSecondsLastSevenDays,
+    );
+  }
 
   @override
   List<Object> get props => [
@@ -21,19 +50,8 @@ class StatsState extends Equatable {
         allEntries,
         activeEntries,
         archivedEntries,
+        totalFocusTimeInSeconds,
+        didMakeEntryLastSevenDays,
+        focusedSecondsLastSevenDays,
       ];
-
-  StatsState copyWith({
-    StatsStatus? status,
-    int? allEntries,
-    int? activeEntries,
-    int? archivedEntries,
-  }) {
-    return StatsState(
-      status: status ?? this.status,
-      allEntries: allEntries ?? this.allEntries,
-      activeEntries: activeEntries ?? this.activeEntries,
-      archivedEntries: archivedEntries ?? this.archivedEntries,
-    );
-  }
 }
