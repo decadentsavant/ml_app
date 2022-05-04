@@ -28,11 +28,15 @@ class LoginForm extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset(
-                'assets/dualColor.png',
-                height: 120,
+              CircleAvatar(
+                radius: 80,
+                backgroundColor: Colors.white.withOpacity(.9),
+                child: Image.asset(
+                  'assets/dualColor.png',
+                  height: 120,
+                ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 32),
               _EmailInput(),
               const SizedBox(height: 8),
               _PasswordInput(),
@@ -107,7 +111,7 @@ class _LoginButton extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  primary: const Color(0xFFFFD600),
+                  primary: const Color.fromRGBO(110, 108, 228, 1),
                 ),
                 onPressed: state.status.isValidated
                     ? () => context.read<LoginCubit>().logInWithCredentials()
@@ -127,13 +131,13 @@ class _GoogleLoginButton extends StatelessWidget {
       key: const Key('loginForm_googleLogin_raisedButton'),
       label: const Text(
         'SIGN IN WITH GOOGLE',
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.black),
       ),
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
         ),
-        primary: theme.colorScheme.secondary,
+        primary: theme.colorScheme.primary,
       ),
       icon: const Icon(FontAwesomeIcons.google, color: Colors.white),
       onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
@@ -144,13 +148,12 @@ class _GoogleLoginButton extends StatelessWidget {
 class _SignUpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return TextButton(
       key: const Key('loginForm_createAccount_flatButton'),
       onPressed: () => Navigator.of(context).push<void>(SignUpPage.route()),
-      child: Text(
+      child: const Text(
         'CREATE ACCOUNT',
-        style: TextStyle(color: theme.primaryColor),
+        style: TextStyle(color: Colors.black),
       ),
     );
   }

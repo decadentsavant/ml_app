@@ -25,10 +25,6 @@ class AllEntriesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('All Entries'),
-        actions: const [],
-      ),
       body: MultiBlocListener(
         listeners: [
           BlocListener<AllEntriesBloc, AllEntriesState>(
@@ -97,6 +93,10 @@ class AllEntriesView extends StatelessWidget {
               child: ListView(
                 controller: ScrollController(),
                 children: [
+                  AppBar(
+                    title: const Text('All Entries'),
+                    actions: const [],
+                  ),
                   const AllEntriesSearch(),
                   for (final entry in state.queriedEntries)
                     AllEntriesListTile(

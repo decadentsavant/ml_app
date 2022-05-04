@@ -21,12 +21,12 @@ class TodaysReviewListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 12),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       child: GestureDetector(
         onLongPressStart: onLongPressStart,
         onLongPressEnd: onLongPressEnd,
         child: Card(
-          elevation: 0,
+          elevation: 10,
           child: Column(
             children: [
               ListTile(
@@ -48,7 +48,7 @@ class TodaysReviewListTile extends StatelessWidget {
                                     _entry.relatedUrl!,
                                   ),
                                 ),
-                            child: const Icon(Icons.link, size: 18),
+                            child: const Icon(Icons.link, size: 18,),
                           ),
                         ),
                       ),

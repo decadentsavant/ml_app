@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:ml_app/theme/theme.dart';
 
 class FlutterMLTheme {
   static ThemeData get light {
+    const _primaryColor = Color.fromRGBO(87, 227, 167, 1);
+    const _secondaryColor = Color.fromRGBO(110, 108, 228, 1);
+    const _tertiary = Color.fromRGBO(255, 216, 98, 1);
+    const _complementColor = Color.fromRGBO(255, 142, 98, 1);
     return ThemeData(
+      useMaterial3: true,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: _primaryColor,
+        primary: _primaryColor,
+        secondary: _secondaryColor,
+        tertiary: _tertiary,
+        error: _complementColor,
+      ),
+      scaffoldBackgroundColor: Colors.transparent,
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
@@ -11,49 +23,19 @@ class FlutterMLTheme {
       ),
       bottomAppBarColor: Colors.transparent,
       bottomAppBarTheme: const BottomAppBarTheme(elevation: 0),
-      colorScheme: ColorScheme.fromSwatch(
-        accentColor: const Color.fromRGBO(87, 227, 167, 1),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: _primaryColor.withOpacity(1),
+        foregroundColor: Colors.white,
+        elevation: 300,
       ),
       snackBarTheme: const SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
       ),
-      toggleableActiveColor: const Color.fromRGBO(87, 227, 167, 1),
+      toggleableActiveColor: _secondaryColor,
     );
   }
 
   static ThemeData get dark {
-    return ThemeData(
-      appBarTheme: const AppBarTheme(
-        color: Color.fromRGBO(87, 227, 167, 1),
-      ),
-      colorScheme: ColorScheme.fromSwatch(
-        brightness: Brightness.dark,
-        accentColor: const Color.fromRGBO(87, 227, 167, 1),
-      ),
-      snackBarTheme: const SnackBarThemeData(
-        behavior: SnackBarBehavior.floating,
-      ),
-      toggleableActiveColor: const Color.fromRGBO(87, 227, 167, 1),
-    );
-  }
-}
-
-class Background extends StatelessWidget {
-  const Background({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [0.15, 1],
-          colors: [
-            Color.fromRGBO(63, 66, 94, 1),
-            Color.fromRGBO(33, 37, 58, 1),
-          ],
-        ),
-      ),
-    );
+    return ThemeData();
   }
 }

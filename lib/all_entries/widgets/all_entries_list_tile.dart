@@ -29,12 +29,13 @@ class AllEntriesListTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: const Icon(
           Icons.delete,
-          color: Color(0xAAFFFFFF),
         ),
       ),
       child: ListTile(
         onTap: onTap,
-        tileColor: entry.isActive ? null : Colors.red[300],
+        tileColor: entry.isActive
+            ? null
+            : Theme.of(context).colorScheme.error.withOpacity(.25),
         title: (entry.source == null || entry.source == '')
             ? Text(
                 entry.title,

@@ -26,13 +26,13 @@ class StatsView extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Stats Page'),
-      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            AppBar(
+              title: const Text('Stats Page'),
+            ),
             ListTile(
               key: const Key('statsView_completedEntries_listTile'),
               leading: const Icon(Icons.check_rounded),

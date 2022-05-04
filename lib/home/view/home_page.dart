@@ -5,7 +5,9 @@ import 'package:ml_app/edit_entry/edit_entry.dart';
 import 'package:ml_app/home/home.dart';
 import 'package:ml_app/profile/profile.dart';
 import 'package:ml_app/stats/stats.dart';
+import 'package:ml_app/theme/theme.dart';
 import 'package:ml_app/todays_review/view/todays_review_dart.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -28,48 +30,51 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final selectedTab = context.select((HomeCubit cubit) => cubit.state.tab);
 
-    return Scaffold(
-      body: IndexedStack(
-        index: selectedTab.index,
-        children: const [
-          TodaysReviewPage(),
-          AllEntriesPage(),
-          StatsPage(),
-          ProfilePage(),
-        ],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        key: const Key('homeView_addEntry_floatingActionButton'),
-        onPressed: () => Navigator.of(context).push(EditEntryPage.route()),
-        child: const Icon(Icons.add),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _HomeTabButton(
-              groupValue: selectedTab,
-              value: HomeTab.todaysReview,
-              icon: const Icon(Icons.cloud_circle_outlined),
-            ),
-            _HomeTabButton(
-              groupValue: selectedTab,
-              value: HomeTab.allEntries,
-              icon: const Icon(Icons.list_rounded),
-            ),
-            _HomeTabButton(
-              groupValue: selectedTab,
-              value: HomeTab.stats,
-              icon: const Icon(Icons.show_chart_rounded),
-            ),
-            _HomeTabButton(
-              groupValue: selectedTab,
-              value: HomeTab.profile,
-              icon: const Icon(Icons.settings_rounded),
-            ),
+    return ScaffoldBackground(
+      scaffold: Scaffold(
+        extendBody: true,
+        body: IndexedStack(
+          index: selectedTab.index,
+          children: const [
+            TodaysReviewPage(),
+            AllEntriesPage(),
+            StatsPage(),
+            ProfilePage(),
           ],
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          key: const Key('homeView_addEntry_floatingActionButton'),
+          onPressed: () => Navigator.of(context).push(EditEntryPage.route()),
+          child: const Icon(Icons.add),
+        ),
+        bottomNavigationBar: BottomAppBar(
+          shape: const CircularNotchedRectangle(),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _HomeTabButton(
+                groupValue: selectedTab,
+                value: HomeTab.todaysReview,
+                icon: const Icon(Icons.cloud_circle_outlined),
+              ),
+              _HomeTabButton(
+                groupValue: selectedTab,
+                value: HomeTab.allEntries,
+                icon: const Icon(Icons.list_rounded),
+              ),
+              _HomeTabButton(
+                groupValue: selectedTab,
+                value: HomeTab.stats,
+                icon: const Icon(Icons.show_chart_rounded),
+              ),
+              _HomeTabButton(
+                groupValue: selectedTab,
+                value: HomeTab.profile,
+                icon: const Icon(Icons.settings_rounded),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -93,8 +98,9 @@ class _HomeTabButton extends StatelessWidget {
     return IconButton(
       onPressed: () => context.read<HomeCubit>().setTab(value),
       iconSize: 32,
-      color:
-          groupValue != value ? null : Theme.of(context).colorScheme.secondary,
+      // color: groupValue != value
+      //     ? Theme.of(context).colorScheme.secondary
+      //     : Theme.of(context).colorScheme.primary,
       icon: icon,
     );
   }

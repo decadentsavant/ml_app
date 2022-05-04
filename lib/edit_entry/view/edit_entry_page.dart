@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ml_app/edit_entry/edit_entry.dart';
+import 'package:ml_app/theme/theme.dart';
+
 
 class EditEntryPage extends StatelessWidget {
   const EditEntryPage({Key? key}) : super(key: key);
@@ -49,44 +51,46 @@ class EditEntryView extends StatelessWidget {
     final fabBackgroundColor = floatingActionButtonTheme.backgroundColor ??
         theme.colorScheme.secondary;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          isNewEntry ? 'Create Entry' : 'Edit Entry',
+    return ScaffoldBackground(
+      scaffold: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          tooltip: 'Edit Entry',
+          shape: const ContinuousRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(32)),
+          ),
+          backgroundColor: status.isLoadingOrSuccess
+              ? fabBackgroundColor.withOpacity(0.5)
+              : fabBackgroundColor,
+          onPressed: status.isLoadingOrSuccess
+              ? null
+              : () =>
+                  context.read<EditEntryBloc>().add(const EditEntrySubmitted()),
+          child: status.isLoadingOrSuccess
+              ? const CupertinoActivityIndicator()
+              : const Icon(Icons.check_rounded),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Edit Entry',
-        shape: const ContinuousRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(32)),
-        ),
-        backgroundColor: status.isLoadingOrSuccess
-            ? fabBackgroundColor.withOpacity(0.5)
-            : fabBackgroundColor,
-        onPressed: status.isLoadingOrSuccess
-            ? null
-            : () =>
-                context.read<EditEntryBloc>().add(const EditEntrySubmitted()),
-        child: status.isLoadingOrSuccess
-            ? const CupertinoActivityIndicator()
-            : const Icon(Icons.check_rounded),
-      ),
-      body: CupertinoScrollbar(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                const _TitleField(),
-                const _NotesField(),
-                const _SourceField(),
-                const _RelatedUrlField(),
-                const _FrequencyTypeField(),
-                const _FrequencyInDaysField(),
-                if (!isNewEntry) const _ActivationDateField(),
-                const SizedBox(height: 20),
-                const _EntryPriority(),
-              ],
+        body: CupertinoScrollbar(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  AppBar(
+                    title: Text(
+                      isNewEntry ? 'Create Entry' : 'Edit Entry',
+                    ),
+                  ),
+                  const _TitleField(),
+                  const _NotesField(),
+                  const _SourceField(),
+                  const _RelatedUrlField(),
+                  const _FrequencyTypeField(),
+                  const _FrequencyInDaysField(),
+                  if (!isNewEntry) const _ActivationDateField(),
+                  const SizedBox(height: 20),
+                  const _EntryPriority(),
+                ],
+              ),
             ),
           ),
         ),

@@ -31,21 +31,6 @@ class TodaysReviewPageView extends StatelessWidget {
     late OverlayEntry _popupDialog;
 
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => context.read<AppBloc>().add(AppLogoutRequested()),
-          icon: const Icon(Icons.logout_outlined),
-        ),
-        title: const Text(
-          "Today's Review",
-        ),
-        actions: [
-          IconButton(
-            onPressed: dummy.uploadDummyData,
-            icon: const Icon(Icons.ac_unit_outlined),
-          )
-        ],
-      ),
       body: BlocBuilder<TodaysReviewBloc, TodaysReviewState>(
         builder: (context, state) {
           if (state.filteredEntries.isEmpty) {
@@ -67,6 +52,22 @@ class TodaysReviewPageView extends StatelessWidget {
             child: ListView(
               primary: false,
               children: [
+                AppBar(
+                  leading: IconButton(
+                    onPressed: () =>
+                        context.read<AppBloc>().add(AppLogoutRequested()),
+                    icon: const Icon(Icons.logout_outlined),
+                  ),
+                  title: const Text(
+                    "Today's Review",
+                  ),
+                  actions: [
+                    IconButton(
+                      onPressed: dummy.uploadDummyData,
+                      icon: const Icon(Icons.ac_unit_outlined),
+                    )
+                  ],
+                ),
                 for (final entry in state.filteredEntries)
                   TodaysReviewListTile(
                     entry: entry,
@@ -100,7 +101,6 @@ class TodaysReviewPageView extends StatelessWidget {
   OverlayEntry _createPopupDialog(Entry entry) {
     return OverlayEntry(
       builder: (context) => FocusAndIsolate(entry),
-      );
+    );
   }
-
 }
