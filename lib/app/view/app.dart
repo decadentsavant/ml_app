@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ml_app/app/app.dart';
 import 'package:ml_app/l10n/l10n.dart';
-import 'package:ml_app/theme/theme.dart';
+import 'package:ml_app/theme/app_theme.dart';
 
 class App extends StatelessWidget {
   const App({

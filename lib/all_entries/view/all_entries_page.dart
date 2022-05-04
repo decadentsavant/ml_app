@@ -95,6 +95,7 @@ class AllEntriesView extends StatelessWidget {
 
             return CupertinoScrollbar(
               child: ListView(
+                controller: ScrollController(),
                 children: [
                   const AllEntriesSearch(),
                   for (final entry in state.queriedEntries)
