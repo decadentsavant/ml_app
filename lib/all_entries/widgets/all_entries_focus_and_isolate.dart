@@ -4,19 +4,33 @@ import 'package:entries_repository/entries_repository.dart';
 import 'package:flutter/material.dart';
 
 class FocusAndIsolate extends StatelessWidget {
-  const FocusAndIsolate(Entry entry, {Key? key})
-      : _entry = entry,
+  const FocusAndIsolate(Entry entry, Tween tween, {Key? key})
+      : _entry = entry, _tween = tween,
         super(key: key);
 
   final Entry _entry;
+  final Tween _tween;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Opacity(
-          opacity: .5,
-          child: Container(
-            color: Colors.black,
+        TweenAnimationBuilder(
+          tween: _tween,
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeInQuad,
+          builder: (context, opacity, child) {
+            return AnimatedOpacity(
+              duration: const Duration(milliseconds: 200),
+              opacity: opacity! as double,
+              child: child,
+            );
+          },
+          child: Opacity(
+            opacity: .5,
+            child: Container(
+              color: Colors.black,
+            ),
           ),
         ),
         Positioned(
@@ -31,18 +45,33 @@ class FocusAndIsolate extends StatelessWidget {
             ),
             child: Material(
               type: MaterialType.transparency,
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    children: [
-                      Text(_entry.title),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Text(_entry.notes),
-                      Text(_entry.learningStamps.toString()),
-                    ],
+              child: TweenAnimationBuilder(
+                tween: _tween,
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.easeOut,
+                builder: (context, scale, child) {
+                  return Transform.scale(
+                    scale: scale! as double,
+                    filterQuality: ui.FilterQuality.high,
+                    child: child,
+                  );
+                },
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      children: [
+                        Text(_entry.title),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Text(_entry.notes),
+                        Text(_entry.learningStamps.toString()),
+                      ],
+                    ),
                   ),
                 ),
               ),

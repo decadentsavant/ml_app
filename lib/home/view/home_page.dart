@@ -32,7 +32,6 @@ class HomeView extends StatelessWidget {
 
     return ScaffoldBackground(
       scaffold: Scaffold(
-        extendBody: true,
         body: IndexedStack(
           index: selectedTab.index,
           children: const [
@@ -71,7 +70,7 @@ class HomeView extends StatelessWidget {
               _HomeTabButton(
                 groupValue: selectedTab,
                 value: HomeTab.profile,
-                icon: const Icon(Icons.settings_rounded),
+                icon: const Icon(Icons.person),
               ),
             ],
           ),

@@ -22,17 +22,31 @@ class SignUpForm extends StatelessWidget {
       },
       child: Align(
         alignment: const Alignment(0, -1 / 3),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _EmailInput(),
-            const SizedBox(height: 8),
-            _PasswordInput(),
-            const SizedBox(height: 8),
-            _ConfirmPasswordInput(),
-            const SizedBox(height: 8),
-            _SignUpButton(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CircleAvatar(
+                radius: 80,
+                backgroundColor: Colors.white.withOpacity(.9),
+                child: Image.asset(
+                  'assets/dualColor.png',
+                  height: 120,
+                ),
+              ),
+              const Text(
+                'Most Learned',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              _EmailInput(),
+              const SizedBox(height: 8),
+              _PasswordInput(),
+              const SizedBox(height: 8),
+              _ConfirmPasswordInput(),
+              const SizedBox(height: 8),
+              _SignUpButton(),
+            ],
+          ),
         ),
       ),
     );
@@ -128,7 +142,7 @@ class _SignUpButton extends StatelessWidget {
                 onPressed: state.status.isValidated
                     ? () => context.read<SignUpCubit>().signUpFormSubmitted()
                     : null,
-                child: const Text('SIGN UP'),
+                child: const Text('Create Account'),
               );
       },
     );

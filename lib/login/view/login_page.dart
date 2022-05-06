@@ -13,9 +13,8 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldBackground(
       scaffold: Scaffold(
-        appBar: AppBar(title: const Text('Login')),
         body: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(16),
           child: BlocProvider(
             create: (_) => LoginCubit(context.read<AuthenticationRepository>()),
             child: const LoginForm(),

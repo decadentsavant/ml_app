@@ -1,206 +1,132 @@
+// import 'dart:async';
 // import 'package:flutter/material.dart';
 
-// void main() {
-//   runApp(const MyApp());
-// }
-
-// // demo image url list
-// List<String> _imageUrlList = [
-//   'https://live.staticflickr.com/8506/8407172630_18d28a2ed3_c_d.jpg',
-//   'https://live.staticflickr.com/8330/8406212067_4802ee432c_c_d.jpg',
-//   'https://live.staticflickr.com/8328/8406290529_a422ef077b_c_d.jpg',
-//   'https://live.staticflickr.com/8071/8407417316_2b09fe27cf_c_d.jpg',
-//   'https://live.staticflickr.com/8226/8407445386_dd416a558b_c_d.jpg',
-//   'https://live.staticflickr.com/8046/8407446162_2c8331fde8_c_d.jpg',
-//   'https://live.staticflickr.com/8334/8407459084_c59da3d8e0_c_d.jpg',
-//   'https://live.staticflickr.com/8370/8406368213_b44c3c5e53_c_d.jpg',
-//   'https://live.staticflickr.com/8237/8406383473_d4552a1cb9_c_d.jpg',
-//   'https://live.staticflickr.com/8323/8407506118_915f7fb1a1_c_d.jpg',
-//   'https://live.staticflickr.com/8077/8406419819_9530514a87_c_d.jpg',
-//   'https://live.staticflickr.com/8048/8406431731_6a3962958d_c_d.jpg',
-//   'https://live.staticflickr.com/8329/8406514685_2473bd6e90_c_d.jpg',
-//   'https://live.staticflickr.com/8506/8407172630_18d28a2ed3_c_d.jpg',
-//   'https://live.staticflickr.com/8330/8406212067_4802ee432c_c_d.jpg',
-//   'https://live.staticflickr.com/8328/8406290529_a422ef077b_c_d.jpg',
-//   'https://live.staticflickr.com/8071/8407417316_2b09fe27cf_c_d.jpg',
-//   'https://live.staticflickr.com/8226/8407445386_dd416a558b_c_d.jpg',
-//   'https://live.staticflickr.com/8046/8407446162_2c8331fde8_c_d.jpg',
-//   'https://live.staticflickr.com/8334/8407459084_c59da3d8e0_c_d.jpg',
-//   'https://live.staticflickr.com/8370/8406368213_b44c3c5e53_c_d.jpg',
-//   'https://live.staticflickr.com/8237/8406383473_d4552a1cb9_c_d.jpg',
-//   'https://live.staticflickr.com/8323/8407506118_915f7fb1a1_c_d.jpg',
-//   'https://live.staticflickr.com/8077/8406419819_9530514a87_c_d.jpg',
-//   'https://live.staticflickr.com/8048/8406431731_6a3962958d_c_d.jpg',
-//   'https://live.staticflickr.com/8329/8406514685_2473bd6e90_c_d.jpg',
-// ];
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({Key? key}) : super(key: key);
-
+// class MyApp2 extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
 //     return MaterialApp(
+//       title: 'Flutter Demo',
 //       theme: ThemeData(
-//         primaryColor: Colors.blueGrey[700],
-//         visualDensity: VisualDensity.adaptivePlatformDensity,
+//         primarySwatch: Colors.blue,
 //       ),
-//       home: const MyHomePage(title: 'Demo of long press popup dialog'),
+//       home: MyHomePage(title: 'Flutter Demo Home Page'),
 //     );
 //   }
 // }
 
 // class MyHomePage extends StatefulWidget {
-//   const MyHomePage({Key? key, required this.title}) : super(key: key);
+//   MyHomePage({Key? key, required this.title}) : super(key: key);
 
 //   final String title;
 
 //   @override
-//   MyHomePageState createState() => MyHomePageState();
+//   _MyHomePageState createState() => _MyHomePageState();
 // }
 
-// class MyHomePageState extends State<MyHomePage> {
+// class _MyHomePageState extends State<MyHomePage>
+//     with SingleTickerProviderStateMixin {
+//   late AnimationController animationController;
+//   List animations = <dynamic>[];
+//   List icons = <dynamic>[
+//     Icons.face,
+//     Icons.settings,
+//     Icons.search,
+//   ];
 
-//   late OverlayEntry _popupDialog;
+//   late OverlayEntry overlayEntry;
+
+//   GlobalKey _key = GlobalKey();
+
+//   @override
+//   void initState() {
+    
+//     animationController = AnimationController(
+//       vsync: this,
+//       duration: const Duration(milliseconds: 500),
+//     );
+
+//     for (int i = 3; i > 0; i--) {
+//       animations.add(
+//         Tween(begin: 0.0, end: 1.0).animate(
+//           CurvedAnimation(
+//             curve: Curves.easeOutCubic,
+//             parent: animationController,
+//           ),
+//         ),
+//       );
+//     }
+
+//     super.initState();
+//   }
+
+//   @override
+//   void dispose() {
+//     animationController.dispose();
+//     animationController.removeListener(() {
+//       setState(() {});
+//     });
+
+//     super.dispose();
+//   }
 
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(widget.title),
+//       floatingActionButton: FloatingActionButton(
+//         key: _key,
+//         onPressed: showOverlay,
+//         child: Icon(Icons.menu),
 //       ),
-//       body: GridView.count(
-//         crossAxisCount: 3,
-//         childAspectRatio: 1,
-//         children: _imageUrlList.map(_createGridTileWidget).toList(),
-//       ),
-//     );
-//   }
-
-//   // create a tile widget from image url
-//   Widget _createGridTileWidget(String url) => Builder(
-//         // use Builder here in order to show the snakbar
-//         builder: (context) => GestureDetector(
-//           // keep the OverlayEntry instance, and insert it into Overlay
-//           onLongPress: () {
-//             _popupDialog = _createPopupDialog(url);
-//             Overlay.of(context)!.insert(_popupDialog);
-//           },
-//           // remove the OverlayEntry from Overlay, so it would be hidden
-//           onLongPressEnd: (details) => _popupDialog.remove(),
-
-//           child: Image.network(url, fit: BoxFit.cover),
-//         ),
-//       );
-
-//   OverlayEntry _createPopupDialog(String url) {
-//     return OverlayEntry(
-//       builder: (context) => AnimatedDialog(
-//         child: _createPopupContent(url),
-//       ),
-//     );
-//   }
-
-//   // this is the main popup dialog content, which includes:
-//   // 1. a container with border radius
-//   // 2. a title bar
-//   // 3. a larger image in the middle
-//   // 4. a bottom action bar
-//   Widget _createPopupContent(String url) => Container(
-//         padding: const EdgeInsets.symmetric(horizontal: 16),
-//         child: ClipRRect(
-//           borderRadius: BorderRadius.circular(16),
-//           child: Column(
-//             mainAxisSize: MainAxisSize.min,
-//             children: [
-//               _createPhotoTitle(),
-//               Image.network(url, fit: BoxFit.fitWidth),
-//               _createActionBar(),
-//             ],
+//       body: Center(
+//         child: GestureDetector(
+//           onLongPressStart: (_) => showOverlay(),
+//           onLongPressEnd: (_) => removeOverlay(),
+//           child: Icon(
+//             (Icons.ac_unit_outlined),
 //           ),
 //         ),
-//       );
+//       ),
+//     );
+//   }
 
-//   Widget _createPhotoTitle() => Container(
-//         padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-//         width: double.infinity,
-//         color: Theme.of(context).primaryColor,
-//         child: const Text(
-//           'this is a large image',
-//           style: TextStyle(color: Colors.white),
-//         ),
-//       );
+//   void showOverlay() async {
+//     RenderBox renderBox = _key.currentContext!
+//.findRenderObject() as RenderBox;
+//     Offset offset = renderBox.localToGlobal(Offset.zero);
 
-//   Widget _createActionBar() => Container(
-//         padding: const EdgeInsets.symmetric(vertical: 5),
-//         color: Theme.of(context).primaryColor,
-//         child: Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//           children: const [
-//             Icon(
-//               Icons.favorite_border,
-//               color: Colors.white,
-//             ),
-//             Icon(
-//               Icons.chat_bubble_outline,
-//               color: Colors.white,
-//             ),
-//             Icon(
-//               Icons.send,
-//               color: Colors.white,
-//             ),
+//     final OverlayState? overlayState = Overlay.of(context);
+
+//     overlayEntry = OverlayEntry(
+//       builder: (context) => Positioned(
+//         left: offset.dx,
+//         bottom: renderBox.size.height + 21,
+//         child: Column(
+//           mainAxisSize: MainAxisSize.min,
+//           children: [
+//             for (int i = 0; i < animations.length; i++)
+//               ScaleTransition(
+//                 scale: animations[i] as Animation<double>,
+//                 child: FloatingActionButton(
+//                   onPressed: () {},
+//                   mini: true,
+//                   child: Icon(icons[i] as IconData?),
+//                 ),
+//               ),
 //           ],
 //         ),
-//       );
-// }
-
-// // This a widget to implement the image scale animation, 
-// //and background grey out effect.
-// class AnimatedDialog extends StatefulWidget {
-//   const AnimatedDialog({Key? key, required this.child}) : super(key: key);
-
-//   final Widget child;
-
-//   @override
-//   State<StatefulWidget> createState() => AnimatedDialogState();
-// }
-
-// class AnimatedDialogState extends State<AnimatedDialog>
-//     with SingleTickerProviderStateMixin {
-//   late AnimationController controller;
-//   late Animation<double> opacityAnimation;
-//   late Animation<double> scaleAnimation;
-
-//   @override
-//   void initState() {
-//     super.initState();
-
-//     controller = AnimationController(
-//       vsync: this,
-//       duration: const Duration(milliseconds: 400),
-//     );
-//     scaleAnimation =
-//         CurvedAnimation(parent: controller, curve: Curves.easeOutExpo);
-//     opacityAnimation = Tween<double>(begin: 0, end: 0.6).animate(
-//       CurvedAnimation(parent: controller, curve: Curves.easeOutExpo),
-//     );
-
-//     controller.addListener(() => setState(() {}));
-//     controller.forward();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Material(
-//       color: Colors.black.withOpacity(opacityAnimation.value),
-//       child: Center(
-//         child: FadeTransition(
-//           opacity: scaleAnimation,
-//           child: ScaleTransition(
-//             scale: scaleAnimation,
-//             child: widget.child,
-//           ),
-//         ),
 //       ),
 //     );
+
+//     animationController.addListener(() {
+//       overlayState!.setState(() {});
+//     });
+//     unawaited(animationController.forward());
+//     overlayState!.insert(overlayEntry);
+//     // await Future<void>.delayed(const Duration(seconds: 1));
+//     // unawaited(animationController.reverse());
+//   }
+
+//   void removeOverlay() {
+//     animationController.reverse();
 //   }
 // }

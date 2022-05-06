@@ -28,13 +28,13 @@ class LoginForm extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CircleAvatar(
-                radius: 80,
-                backgroundColor: Colors.white.withOpacity(.9),
-                child: Image.asset(
-                  'assets/dualColor.png',
-                  height: 120,
-                ),
+              Image.asset(
+                'assets/dualColor.png',
+                height: 120,
+              ),
+              const Text(
+                'Most Learned',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 32),
               _EmailInput(),
@@ -130,12 +130,12 @@ class _GoogleLoginButton extends StatelessWidget {
     return ElevatedButton.icon(
       key: const Key('loginForm_googleLogin_raisedButton'),
       label: const Text(
-        'SIGN IN WITH GOOGLE',
+        'CONTINUE WITH GOOGLE',
         style: TextStyle(color: Colors.black),
       ),
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(5),
         ),
         primary: theme.colorScheme.primary,
       ),

@@ -16,13 +16,15 @@ class TodaysReviewPage extends StatelessWidget {
       create: (context) => TodaysReviewBloc(
         entriesRepository: context.read<EntriesRepository>(),
       )..add(const TodaysReviewSubscriptionRequested()),
-      child: const TodaysReviewPageView(),
+      child: TodaysReviewPageView(),
     );
   }
 }
 
 class TodaysReviewPageView extends StatelessWidget {
-  const TodaysReviewPageView({Key? key}) : super(key: key);
+  TodaysReviewPageView({Key? key}) : super(key: key);
+
+  final Tween<double> _tween = Tween<double>(begin: 0, end: 1);
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +102,7 @@ class TodaysReviewPageView extends StatelessWidget {
 
   OverlayEntry _createPopupDialog(Entry entry) {
     return OverlayEntry(
-      builder: (context) => FocusAndIsolate(entry),
+      builder: (context) => FocusAndIsolate(entry, _tween),
     );
   }
 }
