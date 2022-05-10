@@ -36,12 +36,18 @@ class LoginCubit extends Cubit<LoginState> {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
       await _authenticationRepository.logInWithEmailAndPassword(
-          email: state.email.value, password: state.password.value,);
+        email: state.email.value,
+        password: state.password.value,
+      );
     } catch (_) {
       emit(state.copyWith(status: FormzStatus.submissionFailure));
     }
   }
 
+  // TODO(Corey): Isse supposedly exists on IDE only. Check this flow on
+  // SDK release: https://github.com/flutter/flutter/issues/26705
+  // To recreate, execute this function and then click outside the popup to
+  // cancel the flow. 
   Future<void> logInWithGoogle() async {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
