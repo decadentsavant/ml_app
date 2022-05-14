@@ -31,6 +31,7 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
         var _archivedCount = 0;
         var _focusedSecondsTotal = 0;
         final _didMakeEntryLastSeven = <int, bool>{};
+        final _didFocusLastSeven = <int, bool>{};
         final _secondsFocusedLastSeven = <int, int>{};
 
         for (final entry in entries) {
@@ -40,6 +41,7 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
           // Calculate bool value for new entry created in last 7 days
           final daysPassedSinceActivation =
               _currentDate.difference(entry.activationDate.toLocal()).inDays;
+
           if (daysPassedSinceActivation < 7) {
             _didMakeEntryLastSeven[daysPassedSinceActivation] = true;
           }
@@ -49,7 +51,7 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
                 _currentDate.difference(timeStamp.toLocal()).inDays;
             // Calculate bool value for entry made in last 7 days
             if (daysPassed < 7) {
-              _didMakeEntryLastSeven[daysPassed] = true;
+              _didFocusLastSeven[daysPassed] = true;
             }
             // Calcualte total seconds focused for each of last 7 days
             if (daysPassed < 7) {
@@ -67,6 +69,7 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
         archivedEntries: _archivedCount,
         totalFocusTimeInSeconds: _focusedSecondsTotal,
         didMakeEntryLastSevenDays: _didMakeEntryLastSeven,
+        didFocusLastSevenDays: _didFocusLastSeven,
         focusedSecondsLastSevenDays: _secondsFocusedLastSeven,
         );
       },

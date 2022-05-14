@@ -10,6 +10,7 @@ class StatsState extends Equatable {
     this.archivedEntries = 0,
     this.totalFocusTimeInSeconds = 0,
     this.didMakeEntryLastSevenDays = const {},
+    this.didFocusLastSevenDays = const {},
     this.focusedSecondsLastSevenDays = const {},
   });
 
@@ -19,6 +20,7 @@ class StatsState extends Equatable {
   final int archivedEntries;
   final int totalFocusTimeInSeconds;
   final Map<int, bool> didMakeEntryLastSevenDays;
+  final Map<int, bool> didFocusLastSevenDays;
   final Map<int, int> focusedSecondsLastSevenDays;
 
   StatsState copyWith({
@@ -28,6 +30,7 @@ class StatsState extends Equatable {
     int? archivedEntries,
     int? totalFocusTimeInSeconds,
     Map<int, bool>? didMakeEntryLastSevenDays,
+    Map<int, bool>? didFocusLastSevenDays,
     Map<int, int>? focusedSecondsLastSevenDays,
   }) {
     return StatsState(
@@ -39,6 +42,8 @@ class StatsState extends Equatable {
           totalFocusTimeInSeconds ?? this.totalFocusTimeInSeconds,
       didMakeEntryLastSevenDays:
           didMakeEntryLastSevenDays ?? this.didMakeEntryLastSevenDays,
+      didFocusLastSevenDays:
+          didFocusLastSevenDays ?? this.didFocusLastSevenDays,
       focusedSecondsLastSevenDays:
           focusedSecondsLastSevenDays ?? this.focusedSecondsLastSevenDays,
     );
@@ -52,6 +57,7 @@ class StatsState extends Equatable {
         archivedEntries,
         totalFocusTimeInSeconds,
         didMakeEntryLastSevenDays,
+        didFocusLastSevenDays,
         focusedSecondsLastSevenDays,
       ];
 }
