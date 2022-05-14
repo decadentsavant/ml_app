@@ -13,7 +13,7 @@ class SignUpPage extends StatelessWidget {
  
   @override
   Widget build(BuildContext context) {
-    return ScaffoldBackground(
+    return ScaffoldWrapper(
       scaffold: Scaffold(
         appBar: AppBar(),
         body: Padding(
