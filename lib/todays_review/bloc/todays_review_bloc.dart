@@ -92,7 +92,7 @@ class TodaysReviewBloc extends Bloc<TodaysReviewEvent, TodaysReviewState> {
       ),
     );
     
-    final _learningStamps = event.entry.learningStamps;
+    final _learningStamps = Map.of(event.entry.learningStamps);
     
     // ignore: cascade_invocations
     _learningStamps.addAll({state.learningStart! : state.differentialDate!});
