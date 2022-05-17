@@ -1,2 +1,2 @@
 export 'app_theme.dart';
-export 'custom_scaffold.dart';
+export 'scaffold_wrapper.dart';

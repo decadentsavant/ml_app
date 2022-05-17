@@ -19,12 +19,8 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Icon(
-          Icons.ac_unit_outlined,
-        ),
-      ),
+    return const Center(
+      child: Text('Test'),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ScaffoldBackground extends StatelessWidget {
-  const ScaffoldBackground({required this.scaffold, Key? key})
+class ScaffoldWrapper extends StatelessWidget {
+  const ScaffoldWrapper({required this.scaffold, Key? key})
       : super(key: key);
   final Widget scaffold;
   @override

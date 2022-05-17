@@ -11,7 +11,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldBackground(
+    return ScaffoldWrapper(
       scaffold: Scaffold(
         body: Padding(
           padding: const EdgeInsets.all(16),

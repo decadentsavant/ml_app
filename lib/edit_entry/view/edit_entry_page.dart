@@ -51,7 +51,7 @@ class EditEntryView extends StatelessWidget {
     final fabBackgroundColor = floatingActionButtonTheme.backgroundColor ??
         theme.colorScheme.secondary;
 
-    return ScaffoldBackground(
+    return ScaffoldWrapper(
       scaffold: Scaffold(
         floatingActionButton: FloatingActionButton(
           tooltip: 'Edit Entry',
