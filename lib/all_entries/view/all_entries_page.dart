@@ -94,6 +94,7 @@ class AllEntriesView extends StatelessWidget {
                 controller: ScrollController(),
                 children: [
                   AppBar(
+                    centerTitle: true,
                     title: const Text('All Entries'),
                     actions: const [],
                   ),

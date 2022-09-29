@@ -8,31 +8,48 @@ import 'package:entries_repository/entries_repository.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ml_app/app/app.dart';
 
-
 void bootstrap({required EntriesApi entriesApi}) {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
-
   final entriesRepository = EntriesRepository(entriesApi: entriesApi);
+  Bloc.observer = AppBlocObserver();
 
   runZonedGuarded(
+// 1st arg
     () async {
-      await BlocOverrides.runZoned(
-        () async {
-          final authenticationRepository = AuthenticationRepository();
-          await authenticationRepository.user.first;
-          runApp(
-            App(
-              entriesRepository: entriesRepository,
-              authenticationRepository: authenticationRepository,
-            ),
-          );
-        },
-        blocObserver: AppBlocObserver(),
+      final authenticationRepository = AuthenticationRepository();
+      await authenticationRepository.user.first;
+      runApp(
+        App(
+          entriesRepository: entriesRepository,
+          authenticationRepository: authenticationRepository,
+        ),
       );
     },
+
+//2nd arg
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }
+
+//   runZonedGuarded(
+//     () async {
+//       await BlocOverrides.runZoned(
+//         () async {
+//           final authenticationRepository = AuthenticationRepository();
+//           await authenticationRepository.user.first;
+//           runApp(
+//             App(
+//               entriesRepository: entriesRepository,
+//               authenticationRepository: authenticationRepository,
+//             ),
+//           );
+//         },
+//         blocObserver: AppBlocObserver(),
+//       );
+//     },
+//     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
+//   );
+// }

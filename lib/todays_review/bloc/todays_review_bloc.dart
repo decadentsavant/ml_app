@@ -49,17 +49,17 @@ class TodaysReviewBloc extends Bloc<TodaysReviewEvent, TodaysReviewState> {
       ),
     );
 
-    final result = await canLaunch(event.url);
+    final result = await canLaunchUrl(Uri.parse(event.url));
 
     // 1) Trusts form validation's URL criteria
     // 2) Assumes site is accessible via https:
     // 3) Unsure if uri encode/decode is needed
     try {
       if (result) {
-        await launch(event.url);
+        await launchUrl(Uri.parse(event.url));
       } else {
         final newUrl = 'https://${event.url}';
-        await launch(newUrl);
+        await launchUrl(Uri.parse(newUrl));
       }
     } catch (e) {
       // If browser suspects phishing it throws platform exception.

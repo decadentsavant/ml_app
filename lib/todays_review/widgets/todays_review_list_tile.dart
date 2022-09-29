@@ -1,6 +1,7 @@
 import 'package:entries_repository/entries_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ml_app/theme/app_theme.dart';
 import 'package:ml_app/todays_review/todays_review.dart';
 
 class TodaysReviewListTile extends StatelessWidget {
@@ -21,12 +22,12 @@ class TodaysReviewListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      padding: MLPadding.defaultWidget,
       child: GestureDetector(
         onLongPressStart: onLongPressStart,
         onLongPressEnd: onLongPressEnd,
         child: Card(
-          elevation: 10,
+          elevation: MLElevation.high,
           child: Column(
             children: [
               ListTile(
@@ -38,20 +39,17 @@ class TodaysReviewListTile extends StatelessWidget {
                 trailing: (_entry.relatedUrl == null ||
                         _entry.relatedUrl!.trim().isEmpty)
                     ? const SizedBox()
-                    : Container(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: Transform.rotate(
-                          angle: -0.78539,
-                          child: InkWell(
-                            onTap: () => context.read<TodaysReviewBloc>().add(
-                                  TodaysReviewUrlLaunchRequested(
-                                    _entry.relatedUrl!,
-                                  ),
-                                ),
-                            child: const Icon(Icons.link, size: 18,),
-                          ),
-                        ),
+                    : Transform.rotate(
+                      angle: -0.78539,
+                      child: InkWell(
+                        onTap: () => context.read<TodaysReviewBloc>().add(
+                              TodaysReviewUrlLaunchRequested(
+                                _entry.relatedUrl!,
+                              ),
+                            ),
+                        child: const Icon(Icons.link, size: 18,),
                       ),
+                    ),
               ),
               Text(_entry.notes),
               TextButton(onPressed: onTap, child: const Text('...'))

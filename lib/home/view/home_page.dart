@@ -55,7 +55,7 @@ class HomeView extends StatelessWidget {
               _HomeTabButton(
                 groupValue: selectedTab,
                 value: HomeTab.todaysReview,
-                icon: const Icon(Icons.cloud_circle_outlined),
+                icon: const Icon(Icons.tips_and_updates_outlined),
               ),
               _HomeTabButton(
                 groupValue: selectedTab,
@@ -65,7 +65,7 @@ class HomeView extends StatelessWidget {
               _HomeTabButton(
                 groupValue: selectedTab,
                 value: HomeTab.stats,
-                icon: const Icon(Icons.show_chart_rounded),
+                icon: const Icon(Icons.insights_outlined),
               ),
               _HomeTabButton(
                 groupValue: selectedTab,

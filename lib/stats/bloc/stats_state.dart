@@ -5,59 +5,84 @@ enum StatsStatus { initial, loading, success, failure }
 class StatsState extends Equatable {
   const StatsState({
     this.status = StatsStatus.initial,
-    this.allEntries = 0,
-    this.activeEntries = 0,
-    this.archivedEntries = 0,
-    this.totalFocusTimeInSeconds = 0,
-    this.didMakeEntryLastSevenDays = const {},
-    this.didFocusLastSevenDays = const {},
-    this.focusedSecondsLastSevenDays = const {},
+    this.totalEntries = 0,
+    this.totalActiveEntries = 0,
+    this.totalArchivedEntries = 0,
+    this.totalEntriesMadeToday = 0,
+    this.totalFocusedSecondsToday = 0,
+    this.totalFocusedSecondsThisWeek = 0,
+    this.totalFocusedSecondsAllTime = 0,
+    this.didMakeEntryLast7Days = const {},
+    this.didMakeEntryLast365Days = const {},
+    this.totalFocusedSecondsEachOfLast7Days = const {},
+    this.didMakeEntryAndMeetFocusGoalEachOfLast7Days = const {},
   });
 
   final StatsStatus status;
-  final int allEntries;
-  final int activeEntries;
-  final int archivedEntries;
-  final int totalFocusTimeInSeconds;
-  final Map<int, bool> didMakeEntryLastSevenDays;
-  final Map<int, bool> didFocusLastSevenDays;
-  final Map<int, int> focusedSecondsLastSevenDays;
+  final int totalEntries;
+  final int totalActiveEntries;
+  final int totalArchivedEntries;
+  final int totalEntriesMadeToday;
+  final int totalFocusedSecondsToday;
+  final int totalFocusedSecondsThisWeek;
+  final int totalFocusedSecondsAllTime;
+  final Map<int, bool> didMakeEntryLast7Days;
+  final Map<int, bool> didMakeEntryLast365Days;
+  final Map<int, int> totalFocusedSecondsEachOfLast7Days;
+  final Map<int, bool> didMakeEntryAndMeetFocusGoalEachOfLast7Days;
 
   StatsState copyWith({
     StatsStatus? status,
-    int? allEntries,
-    int? activeEntries,
-    int? archivedEntries,
-    int? totalFocusTimeInSeconds,
-    Map<int, bool>? didMakeEntryLastSevenDays,
-    Map<int, bool>? didFocusLastSevenDays,
-    Map<int, int>? focusedSecondsLastSevenDays,
+    int? totalEntries,
+    int? totalActiveEntries,
+    int? totalArchivedEntries,
+    int? totalEntriesMadeToday,
+    int? totalFocusedSecondsToday,
+    int? totalFocusedSecondsThisWeek,
+    int? totalFocusedSecondsAllTime,
+    Map<int, bool>? didMakeEntryLast7Days,
+    Map<int, bool>? didMakeEntryLast365Days,
+    Map<int, int>? totalFocusedSecondsEachOfLast7Days,
+    Map<int, bool>? didMakeEntryAndMeetFocusGoalEachOfLast7Days,
   }) {
     return StatsState(
       status: status ?? this.status,
-      allEntries: allEntries ?? this.allEntries,
-      activeEntries: activeEntries ?? this.activeEntries,
-      archivedEntries: archivedEntries ?? this.archivedEntries,
-      totalFocusTimeInSeconds:
-          totalFocusTimeInSeconds ?? this.totalFocusTimeInSeconds,
-      didMakeEntryLastSevenDays:
-          didMakeEntryLastSevenDays ?? this.didMakeEntryLastSevenDays,
-      didFocusLastSevenDays:
-          didFocusLastSevenDays ?? this.didFocusLastSevenDays,
-      focusedSecondsLastSevenDays:
-          focusedSecondsLastSevenDays ?? this.focusedSecondsLastSevenDays,
+      totalEntries: totalEntries ?? this.totalEntries,
+      totalActiveEntries: totalActiveEntries ?? this.totalActiveEntries,
+      totalArchivedEntries: totalArchivedEntries ?? this.totalArchivedEntries,
+      totalEntriesMadeToday:
+          totalEntriesMadeToday ?? this.totalEntriesMadeToday,
+      totalFocusedSecondsToday:
+          totalFocusedSecondsToday ?? this.totalFocusedSecondsToday,
+      totalFocusedSecondsAllTime:
+          totalFocusedSecondsAllTime ?? this.totalFocusedSecondsAllTime,
+      didMakeEntryLast7Days:
+          didMakeEntryLast7Days ?? this.didMakeEntryLast7Days,
+      totalFocusedSecondsThisWeek:
+          totalFocusedSecondsThisWeek ?? this.totalFocusedSecondsThisWeek,
+      didMakeEntryLast365Days:
+          didMakeEntryLast365Days ?? this.didMakeEntryLast365Days,
+      totalFocusedSecondsEachOfLast7Days: totalFocusedSecondsEachOfLast7Days ??
+          this.totalFocusedSecondsEachOfLast7Days,
+      didMakeEntryAndMeetFocusGoalEachOfLast7Days:
+          didMakeEntryAndMeetFocusGoalEachOfLast7Days ??
+              this.didMakeEntryAndMeetFocusGoalEachOfLast7Days,
     );
   }
 
   @override
   List<Object> get props => [
         status,
-        allEntries,
-        activeEntries,
-        archivedEntries,
-        totalFocusTimeInSeconds,
-        didMakeEntryLastSevenDays,
-        didFocusLastSevenDays,
-        focusedSecondsLastSevenDays,
+        totalEntries,
+        totalActiveEntries,
+        totalArchivedEntries,
+        totalEntriesMadeToday,
+        totalFocusedSecondsToday,
+        totalFocusedSecondsThisWeek,
+        totalFocusedSecondsAllTime,
+        didMakeEntryLast7Days,
+        didMakeEntryLast365Days,
+        totalFocusedSecondsEachOfLast7Days,
+        didMakeEntryAndMeetFocusGoalEachOfLast7Days,
       ];
 }
