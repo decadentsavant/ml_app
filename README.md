@@ -16,7 +16,7 @@ Utilize self-reflection and spaced-repetition to hammer into your brain anything
 
 This app currently serves as my primary project for learning software development. Applied learnings include:
 
-##### Tools
+#### Tools
 
 1. VSCode, Android Studio, Xcode
     * various VSCode extensions
@@ -30,7 +30,7 @@ This app currently serves as my primary project for learning software developmen
     * Dart/Flutter CLI
     * GitHub CLI tool
 
-##### Dart / Flutter
+#### Dart / Flutter
 
 1. State management
     * Bloc (current)
