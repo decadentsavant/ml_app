@@ -17,7 +17,6 @@ void bootstrap({required EntriesApi entriesApi}) {
   Bloc.observer = AppBlocObserver();
 
   runZonedGuarded(
-// 1st arg
     () async {
       final authenticationRepository = AuthenticationRepository();
       await authenticationRepository.user.first;
@@ -28,28 +27,6 @@ void bootstrap({required EntriesApi entriesApi}) {
         ),
       );
     },
-
-//2nd arg
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }
-
-//   runZonedGuarded(
-//     () async {
-//       await BlocOverrides.runZoned(
-//         () async {
-//           final authenticationRepository = AuthenticationRepository();
-//           await authenticationRepository.user.first;
-//           runApp(
-//             App(
-//               entriesRepository: entriesRepository,
-//               authenticationRepository: authenticationRepository,
-//             ),
-//           );
-//         },
-//         blocObserver: AppBlocObserver(),
-//       );
-//     },
-//     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
-//   );
-// }
