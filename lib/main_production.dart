@@ -10,7 +10,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  final test = FirebaseFirestore.instance;
+  final instance = FirebaseFirestore.instance;
 
-  bootstrap(entriesApi: FirebaseEntriesApi(test));
+  bootstrap(entriesApi: FirebaseEntriesApi(instance));
 }
