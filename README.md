@@ -29,6 +29,7 @@ This app currently serves as my primary project for learning software developmen
 4. CLI
     * Dart/Flutter CLI
     * GitHub CLI tool
+    * Firebase CLI
 
 #### Dart / Flutter
 
